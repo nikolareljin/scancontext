@@ -121,20 +121,90 @@ explicitly turn on a cloud AI provider in Settings. AI is **off by default**.
 
 ## Optional — connect an AI provider
 
-AI is **off by default** and entirely optional. If you turn it on in
-**Settings**, you can use any one of these. Cloud providers need a free or
-paid API key; Ollama runs fully on your own machine with no key.
+AI is **off by default** and entirely optional — ScanContext works fully
+without it. When you turn it on, it can summarize reports, translate
+non-English reports, and suggest regions of an image worth a closer look —
+always labeled "candidate findings, not a diagnosis".
+
+You can use any one of these providers:
 
 | Provider | Get a key / install | Notes |
 |----------|---------------------|-------|
-| Google Gemini | <https://aistudio.google.com/apikey> | Free tier available |
+| **Google Gemini** | <https://aistudio.google.com/apikey> | Recommended — free tier to try, paid tier for real use |
 | Anthropic Claude | <https://console.anthropic.com/settings/keys> | Paid API |
 | OpenAI | <https://platform.openai.com/api-keys> | Paid API |
-| Ollama | <https://ollama.com/download> | Fully local, no key, no cloud |
+| Ollama | <https://ollama.com/download> | Fully local — no key, nothing leaves your computer |
 
-When a cloud provider is enabled, image/report data may be sent to that
-provider — ScanContext strips patient identifiers first. Ollama keeps
-everything on your computer.
+When a cloud provider is enabled, image/report data **for the study you
+choose** may be sent to that provider — ScanContext strips patient identifiers
+first. Ollama keeps everything on your machine.
+
+### Setting up Google Gemini (recommended)
+
+**1. Get an API key.** Open <https://aistudio.google.com/apikey>, sign in with
+a Google account, click **Create API key**, and copy it (it looks like
+`AIza…`). Keep it private — treat it like a password.
+
+**2. Turn on billing — important for medical privacy.** A new key starts on the
+free tier. Open the key's Google Cloud project and enable billing (the **paid
+tier**):
+
+> ⚠️ **Anonymization only protects you on the paid tier.** ScanContext strips
+> patient identifiers before sending anything to Gemini — but on the **free
+> tier, Google may still use your (anonymized) images and reports to improve
+> its models**. Only the **paid tier** stops that. The anonymization step does
+> not give you real privacy on the free tier — for actual medical data, use the
+> paid tier.
+
+- The most thorough model (`gemini-2.5-pro`) and reliable speed need the paid
+  tier.
+- You can set a **budget cap** in Google Cloud so there are no surprises.
+
+**3. Add the key to ScanContext.** Open the `.env` configuration file and set
+these four lines:
+
+```ini
+AI_PROVIDER=gemini
+CLOUD_AI_ENABLED=true
+GEMINI_API_KEY=AIza...your-key...
+GEMINI_MODEL=gemini-2.5-flash
+```
+
+Where the `.env` file lives:
+
+| How you installed ScanContext | `.env` location |
+|-------------------------------|-----------------|
+| Download bundle (`.zip`)      | Inside the unzipped `ScanContext-<version>` folder |
+| ScanContext app — Windows     | `%APPDATA%\com.nikolareljin.scancontext\.env` |
+| ScanContext app — macOS       | `~/Library/Application Support/com.nikolareljin.scancontext/.env` |
+| ScanContext app — Linux       | `~/.local/share/com.nikolareljin.scancontext/.env` |
+
+**4. Restart ScanContext** so it loads the key — **Stop**, then **Start**.
+
+Then open a study and use **Analyze study**; you confirm cloud use per study.
+
+### Which Gemini model?
+
+| You want… | Set `GEMINI_MODEL` to |
+|-----------|-----------------------|
+| Cheap, fast, good for everyday use | `gemini-2.5-flash` (default) |
+| The most thorough analysis | `gemini-2.5-pro` |
+
+### What does it cost?
+
+Gemini charges per use, and ScanContext only calls it when you ask it to
+analyze a study. The cost per study is **capped by design** — ScanContext
+reviews at most about a dozen sampled images no matter how many slices a scan
+has, so a huge scan costs the same as a small one.
+
+| Model | Cost to analyze one scan / series |
+|-------|-----------------------------------|
+| `gemini-2.5-flash` | roughly **2–3 cents** |
+| `gemini-2.5-pro` | roughly **10–20 cents** |
+
+Even heavy use — 100 studies in a month — is about **$2–3 on Flash** or
+**$10–20 on Pro**. Summarizing or translating a text report costs a fraction
+of a cent. Prices are set by Google; current rates: <https://ai.google.dev/pricing>.
 
 ---
 
@@ -173,6 +243,10 @@ any amount helps:
   folder and any exports private.
 - Cloud AI is opt-in. When enabled, image/report data may be sent to the
   provider you choose; ScanContext strips patient identifiers first.
+- That anonymization only gives you real privacy on a **paid** provider plan.
+  On Google Gemini's **free tier**, your anonymized data may still be used by
+  Google to improve its models — use the **paid tier** for genuine medical
+  data, or use **Ollama** to keep everything on your own machine.
 
 Built and maintained by **Nik Reljin** · [GitHub](https://github.com/nikolareljin)
 · [LinkedIn](https://www.linkedin.com/in/nikolareljin)
