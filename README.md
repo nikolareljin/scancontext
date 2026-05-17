@@ -10,42 +10,98 @@ Linux.
 > condition. Every result — especially anything AI-suggested — must be
 > confirmed by a qualified clinician.
 
+**Quick links:**
+[⬇️ Download](https://github.com/nikolareljin/scancontext/releases/latest) ·
+[🐳 Docker Desktop](https://www.docker.com/products/docker-desktop/) ·
+[🐞 Report a problem](https://github.com/nikolareljin/scancontext/issues) ·
+[☕ Donate](https://ko-fi.com/nikolareljin)
+
 ---
 
 ## ⬇️ Download & install
 
-No GitHub account, no source code, no terminal needed.
+No GitHub account, no source code, and no terminal needed.
 
-### 1. Install Docker Desktop (free, one time)
+There are **two ways to run ScanContext** — pick whichever you prefer. Both
+need Docker Desktop, so do Step 1 either way.
 
-ScanContext runs inside Docker. Install Docker Desktop:
+### Step 1 — Install Docker Desktop (free, one time)
+
+ScanContext runs inside Docker. Install Docker Desktop for your system:
 
 **<https://www.docker.com/products/docker-desktop/>**
 
-Open it once after installing and wait until it says **"running"**.
+- Windows: <https://docs.docker.com/desktop/install/windows-install/>
+- macOS: <https://docs.docker.com/desktop/install/mac-install/>
+- Linux: <https://docs.docker.com/desktop/install/linux/>
 
-### 2. Download ScanContext
+After installing, **open Docker Desktop once** and wait until it says
+**"running"**. You only ever do this once.
 
-Get the latest bundle from the **[Releases page](../../releases/latest)** —
-the file named `ScanContext-<version>.zip`. Unzip it anywhere (Desktop,
-Documents…).
+### Step 2 — Choose how to run ScanContext
 
-### 3. Start it
+All downloads are on the **[Releases page](https://github.com/nikolareljin/scancontext/releases/latest)**.
 
-| System  | Do this |
-|---------|---------|
-| Windows | Double-click **`Start ScanContext.bat`** |
-| macOS   | Double-click **`Start ScanContext.command`** |
-| Linux   | Run `sh ./start.sh` in the folder |
+#### Option A — The ScanContext app (recommended, easiest)
+
+A small desktop app that starts and stops ScanContext for you with one click —
+no scripts, no files to manage. Download the installer for your system:
+
+| System  | Download | Install |
+|---------|----------|---------|
+| Windows | `ScanContext_<version>_x64-setup.exe` | Double-click, follow the installer |
+| macOS   | `ScanContext_<version>_<arch>.dmg` | Open the `.dmg`, drag **ScanContext** to Applications |
+| Linux   | `ScanContext_<version>_amd64.AppImage` | `chmod +x` the file, then double-click — or install the `.deb` / `.rpm` |
+
+Then open **ScanContext** like any other app. It checks Docker, downloads the
+app on first run, and opens it in your browser. Use the window — or the tray /
+menu-bar icon — to **Start**, **Stop**, and **Open** ScanContext any time.
+
+> **First launch — unsigned app warning.** These installers are not yet
+> code-signed, so your system may warn you the first time:
+> - **macOS:** right-click the app → **Open** → **Open**. (Or System Settings →
+>   Privacy & Security → **Open Anyway**.)
+> - **Windows:** on the blue SmartScreen prompt, click **More info** →
+>   **Run anyway**.
+>
+> You only need to do this once.
+
+#### Option B — The download bundle (`.zip`)
+
+If you would rather not install an app, download the bundle and double-click a
+start file:
+
+1. Download `ScanContext-<version>.zip` from the
+   [Releases page](https://github.com/nikolareljin/scancontext/releases/latest)
+   and unzip it anywhere (Desktop, Documents…).
+2. Open the unzipped folder and start it:
+
+   | System  | Do this |
+   |---------|---------|
+   | Windows | Double-click **`Start ScanContext.bat`** |
+   | macOS   | Double-click **`Start ScanContext.command`** |
+   | Linux   | Run `sh ./start.sh` in the folder |
 
 The first start downloads the app (a few minutes). When it is ready your
-browser opens at **http://localhost:5173**, and a short guided tour begins.
-Reopen help any time with the **"?"** button.
+browser opens **ScanContext**, and a short guided tour begins. Reopen help any
+time with the **"?"** button.
 
 ### Stopping it
 
-Double-click **`Stop ScanContext.bat`** (Windows) or run `sh ./stop.sh`
-(macOS / Linux). Your data is always kept.
+- **App (Option A):** click **Stop** in the window or the tray / menu-bar icon.
+- **Bundle (Option B):** double-click **`Stop ScanContext.bat`** (Windows) or
+  run `sh ./stop.sh` (macOS / Linux).
+
+Your studies and data are always kept between runs.
+
+---
+
+## System requirements
+
+- **Windows 10/11**, **macOS 12+**, or a modern **Linux** desktop.
+- **Docker Desktop** installed and running.
+- ~4 GB free disk space for the app images, plus room for your studies.
+- A modern browser (Chrome, Edge, Firefox, or Safari).
 
 ---
 
@@ -60,6 +116,42 @@ Double-click **`Stop ScanContext.bat`** (Windows) or run `sh ./stop.sh`
 
 **Your data stays on your machine.** Nothing is uploaded anywhere unless you
 explicitly turn on a cloud AI provider in Settings. AI is **off by default**.
+
+---
+
+## Optional — connect an AI provider
+
+AI is **off by default** and entirely optional. If you turn it on in
+**Settings**, you can use any one of these. Cloud providers need a free or
+paid API key; Ollama runs fully on your own machine with no key.
+
+| Provider | Get a key / install | Notes |
+|----------|---------------------|-------|
+| Google Gemini | <https://aistudio.google.com/apikey> | Free tier available |
+| Anthropic Claude | <https://console.anthropic.com/settings/keys> | Paid API |
+| OpenAI | <https://platform.openai.com/api-keys> | Paid API |
+| Ollama | <https://ollama.com/download> | Fully local, no key, no cloud |
+
+When a cloud provider is enabled, image/report data may be sent to that
+provider — ScanContext strips patient identifiers first. Ollama keeps
+everything on your computer.
+
+---
+
+## Troubleshooting
+
+- **"Docker is not installed" / "not running".** Install Docker Desktop, open
+  it, and wait until it says **"running"** — then start ScanContext again.
+- **The app says Docker is missing but it is installed (macOS).** Make sure
+  Docker Desktop has been launched at least once; the ScanContext app looks for
+  it in the standard locations.
+- **A port is already in use.** ScanContext uses ports `5173`, `8000`, and
+  `8042` on your machine. If one is taken, edit `FRONTEND_PORT` /
+  `BACKEND_PORT` / `ORTHANC_PORT` in the `.env` file and start again.
+- **First start is slow.** The first run downloads the app images (a few
+  minutes). Later starts are fast.
+- **Still stuck?** Open an issue:
+  <https://github.com/nikolareljin/scancontext/issues>
 
 ---
 
