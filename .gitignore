@@ -1,0 +1,26 @@
+# Public distribution repo — this repo must NEVER contain credentials or
+# source code. The only tracked files are README.md and this .gitignore;
+# release bundles are attached as Release assets, not committed.
+
+# Environment / secrets — never commit
+.env
+*.env
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+credentials*
+secrets*
+*token*
+*secret*
+
+# Release artifacts (uploaded to GitHub Releases, not committed)
+*.zip
+*.tar.gz
+dist-bundle/
+
+# OS / editor noise
+.DS_Store
+.idea/
+.vscode/
