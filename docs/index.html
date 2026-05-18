@@ -474,7 +474,7 @@
     <!-- step 2 -->
     <div class="install-step">
       <span class="badge">Step 2 &mdash; pick your system</span>
-      <h3>Download &amp; start ScanContext <span class="ver">latest: v0.4.0</span></h3>
+      <h3>Download &amp; start ScanContext <span class="ver" id="verBadge">latest release</span></h3>
       <p>There are two ways to run it &mdash; the <b>app</b> (easiest) or a
       <b>download bundle</b>. Choose whichever you prefer; both work the same
       once open. The buttons below download the file directly &mdash; there's
@@ -493,8 +493,8 @@
           <h4>The ScanContext app</h4>
           <p>A small desktop app that starts and stops ScanContext for you.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_x64-setup.exe">&#11015; Download for Windows &mdash; installer (.exe)</a>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_x64_en-US.msi">&#11015; .msi alternative</a>
+            <a class="btn btn-primary btn-sm" data-asset="win-exe" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download for Windows &mdash; installer (.exe)</a>
+            <a class="btn btn-ghost btn-sm" data-asset="win-msi" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; .msi alternative</a>
           </div>
           <ol>
             <li><b>Double-click</b> the downloaded installer and follow it through.</li>
@@ -507,7 +507,7 @@
           <h4>The download bundle (.zip)</h4>
           <p>No installer &mdash; just unzip and double-click a start file.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0.zip">&#11015; Download bundle &mdash; ScanContext-0.4.0.zip</a>
+            <a class="btn btn-primary btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download the bundle (.zip)</a>
           </div>
           <ol>
             <li>Unzip it anywhere (Desktop, Documents&hellip;).</li>
@@ -526,7 +526,7 @@
           <h4>The ScanContext app</h4>
           <p>For Apple Silicon Macs (M1/M2/M3 and newer). On an Intel Mac, please use Option B below.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_aarch64.dmg">&#11015; Download for macOS &mdash; Apple Silicon (.dmg)</a>
+            <a class="btn btn-primary btn-sm" data-asset="mac-dmg" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download for macOS &mdash; Apple Silicon (.dmg)</a>
           </div>
           <ol>
             <li>Open the <code>.dmg</code> and <b>drag ScanContext into Applications</b>.</li>
@@ -539,7 +539,7 @@
           <h4>The download bundle (.zip)</h4>
           <p>Works on both Apple Silicon and Intel Macs.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0.zip">&#11015; Download bundle &mdash; ScanContext-0.4.0.zip</a>
+            <a class="btn btn-primary btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download the bundle (.zip)</a>
           </div>
           <ol>
             <li>Unzip it anywhere.</li>
@@ -558,9 +558,9 @@
           <h4>The ScanContext app</h4>
           <p>Pick the package for your distribution &mdash; or the portable AppImage.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_amd64.AppImage">&#11015; AppImage (portable)</a>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_amd64.deb">&#11015; .deb (Debian / Ubuntu)</a>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0-1.x86_64.rpm">&#11015; .rpm (Fedora / RHEL)</a>
+            <a class="btn btn-primary btn-sm" data-asset="linux-appimage" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; AppImage (portable)</a>
+            <a class="btn btn-ghost btn-sm" data-asset="linux-deb" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; .deb (Debian / Ubuntu)</a>
+            <a class="btn btn-ghost btn-sm" data-asset="linux-rpm" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; .rpm (Fedora / RHEL)</a>
           </div>
           <ol>
             <li><b>AppImage:</b> make it executable (<code>chmod +x</code>) then double-click it. <b>.deb / .rpm:</b> install it like any package.</li>
@@ -577,7 +577,7 @@
           <p style="font-size:.92rem">To download the AppImage instead, swap <code>\.zip"</code> for <code>\.AppImage"</code> in the command above.</p>
           <p style="font-size:.92rem">Or download the bundle by hand:</p>
           <div class="dl-row">
-            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0.zip">&#11015; ScanContext-0.4.0.zip</a>
+            <a class="btn btn-ghost btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download the bundle (.zip)</a>
           </div>
           <p style="font-size:.92rem">First start downloads the app (a few minutes); then your browser opens ScanContext.</p>
         </div>
@@ -605,7 +605,7 @@
       <a class="btn btn-ghost" href="https://github.com/nikolareljin/scancontext/releases" target="_blank" rel="noopener">&#128230; Browse all releases (incl. previous) &#8599;</a>
       <a class="btn btn-ghost" href="#faq">Need a hand? See Help</a>
     </div>
-    <p class="os-detect" style="margin-top:14px">The download buttons above link straight to the v0.4.0 files. Older versions are on the all-releases page.</p>
+    <p class="os-detect" style="margin-top:14px">The download buttons above always point to the newest release. Older versions are on the all-releases page.</p>
   </div>
 </section>
 
@@ -879,6 +879,77 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
   toTop.addEventListener("click",function(){
     window.scrollTo({top:0,behavior:"smooth"});
   });
+
+  // ---- live download links ----------------------------------------------
+  // Resolve every download button to the newest release's matching asset by
+  // querying the public GitHub Releases API. No build step and no manual
+  // edits are ever needed: a new release is reflected the moment it
+  // publishes. If the API is unreachable or rate-limited, the buttons keep
+  // their fallback href (the Releases page), so they always work.
+  var RELEASE_API="https://api.github.com/repos/nikolareljin/scancontext/releases/latest";
+  var CACHE_KEY="sc-latest-release";
+  var CACHE_TTL=6*60*60*1000; // 6 hours
+  // Each button carries data-asset; map it to a filename pattern.
+  var ASSET_RULES={
+    "win-exe":/\.exe$/i,
+    "win-msi":/\.msi$/i,
+    "mac-dmg":/\.dmg$/i,
+    "linux-appimage":/\.AppImage$/i,
+    "linux-deb":/\.deb$/i,
+    "linux-rpm":/\.rpm$/i,
+    "bundle-zip":/\.zip$/i
+  };
+  function applyRelease(rel){
+    if(!rel||!rel.assets||!rel.assets.length)return;
+    var badge=document.getElementById("verBadge");
+    if(badge&&rel.tag_name){
+      badge.textContent="latest: v"+String(rel.tag_name).replace(/^v/,"");
+    }
+    Object.keys(ASSET_RULES).forEach(function(key){
+      var rx=ASSET_RULES[key],hit=null,i;
+      for(i=0;i<rel.assets.length;i++){
+        if(rx.test(rel.assets[i].name)){hit=rel.assets[i];break;}
+      }
+      if(!hit||!hit.browser_download_url)return;
+      var btns=document.querySelectorAll('a[data-asset="'+key+'"]');
+      Array.prototype.forEach.call(btns,function(b){
+        b.href=hit.browser_download_url;
+      });
+    });
+  }
+  function readCache(){
+    try{
+      var raw=window.localStorage.getItem(CACHE_KEY);
+      if(!raw)return null;
+      var obj=JSON.parse(raw);
+      if(!obj||(Date.now()-obj.savedAt)>CACHE_TTL)return null;
+      return obj.release;
+    }catch(e){return null;}
+  }
+  function writeCache(rel){
+    try{
+      window.localStorage.setItem(CACHE_KEY,JSON.stringify({savedAt:Date.now(),release:rel}));
+    }catch(e){/* storage unavailable — ignore */}
+  }
+  var cached=readCache();
+  if(cached)applyRelease(cached);
+  if(window.fetch){
+    window.fetch(RELEASE_API,{headers:{Accept:"application/vnd.github+json"}})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(data){
+        if(!data||!data.assets)return;
+        // Store a slim copy — just what the buttons and badge need.
+        var slim={
+          tag_name:data.tag_name,
+          assets:data.assets.map(function(a){
+            return {name:a.name,browser_download_url:a.browser_download_url};
+          })
+        };
+        writeCache(slim);
+        applyRelease(slim);
+      })
+      .catch(function(){/* keep fallback hrefs */});
+  }
 })();
 </script>
 </body>
