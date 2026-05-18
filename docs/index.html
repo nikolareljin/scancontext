@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScanContext — understand your medical scans on your own computer</title>
+<meta name="description" content="ScanContext is a free, local-first medical image viewer, report organizer, and optional AI-assisted annotation tool for Windows, macOS, and Linux. Your data stays on your machine. Not a medical device.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="ScanContext — understand your medical scans on your own computer">
+<meta property="og:description" content="Free, local-first medical image viewer and report organizer for Windows, macOS, and Linux. Your data stays on your machine. Not a medical device.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://github.com/user-attachments/assets/99b8ed13-2ca9-4af6-a96a-1c2799edf3e9">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{
+    --bg:#0f172a; --bg-2:#111d36; --panel:#16223f; --panel-2:#1c2c4f;
+    --line:#27375f; --ink:#e6edf7; --ink-dim:#9fb0cc; --ink-mute:#6f81a3;
+    --teal:#2dd4bf; --teal-deep:#0d9488; --amber:#f59e0b; --amber-soft:#fbbf24;
+    --radius:14px; --maxw:1080px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--font);
+    line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{line-height:1.2;letter-spacing:-.02em}
+  h2{font-size:clamp(1.6rem,3.4vw,2.4rem);margin-bottom:.5em}
+  h3{font-size:1.22rem;margin-bottom:.35em}
+  p{color:var(--ink-dim)}
+  section{padding:72px 0;border-top:1px solid var(--line)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .lead{font-size:1.08rem;max-width:62ch}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;
+    font-weight:700;color:var(--teal);margin-bottom:.6em;
+  }
+  code{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:6px;
+    padding:.08em .42em;font-size:.86em;color:var(--amber-soft);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  pre{
+    background:#0a1226;border:1px solid var(--line);border-radius:10px;
+    padding:16px 18px;overflow:auto;margin:14px 0;
+  }
+  pre code{background:none;border:0;padding:0;color:var(--teal);font-size:.9rem;line-height:1.7}
+
+  /* ---- nav ---- */
+  header.nav{
+    position:sticky;top:0;z-index:50;background:rgba(15,23,42,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;gap:18px;max-width:var(--maxw);
+    margin:0 auto;padding:12px 22px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;
+    font-size:1.06rem;color:var(--ink);letter-spacing:-.02em}
+  .brand:hover{text-decoration:none}
+  .brand svg{width:30px;height:30px;flex:none}
+  .nav-links{display:flex;gap:22px;margin-left:auto;align-items:center}
+  .nav-links a{color:var(--ink-dim);font-size:.93rem;font-weight:600}
+  .nav-links a:hover{color:var(--ink);text-decoration:none}
+  .nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--line);
+    color:var(--ink);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:1rem}
+
+  /* ---- buttons ---- */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;font-weight:700;
+    border-radius:10px;padding:12px 20px;font-size:.97rem;cursor:pointer;
+    border:1px solid transparent;transition:transform .05s ease,filter .15s ease;
+  }
+  .btn:hover{text-decoration:none;filter:brightness(1.08)}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--teal);color:#04201c}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-amber{background:var(--amber);color:#3a2400}
+  .btn-sm{padding:8px 14px;font-size:.86rem;border-radius:8px}
+
+  /* ---- hero ---- */
+  .hero{
+    border-top:0;padding:84px 0 60px;
+    background:radial-gradient(900px 420px at 78% -8%,rgba(45,212,191,.16),transparent 60%),
+               radial-gradient(700px 360px at 8% 6%,rgba(245,158,11,.10),transparent 62%);
+  }
+  .hero h1{font-size:clamp(2.1rem,5.4vw,3.5rem);margin-bottom:.32em}
+  .hero h1 .accent{color:var(--teal)}
+  .hero .lead{font-size:1.18rem;color:var(--ink);max-width:60ch}
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;background:var(--panel);
+    border:1px solid var(--line);border-radius:999px;padding:6px 14px;
+    font-size:.82rem;font-weight:600;color:var(--ink-dim);margin-bottom:20px;
+  }
+  .pill .dot{width:8px;height:8px;border-radius:50%;background:var(--teal)}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+  .os-detect{margin-top:16px;font-size:.9rem;color:var(--ink-mute)}
+  .os-detect b{color:var(--teal)}
+
+  /* ---- disclaimer banner ---- */
+  .disclaimer{
+    background:linear-gradient(180deg,rgba(245,158,11,.12),rgba(245,158,11,.05));
+    border:1px solid rgba(245,158,11,.4);border-radius:var(--radius);
+    padding:20px 22px;margin-top:34px;display:flex;gap:14px;align-items:flex-start;
+  }
+  .disclaimer .ic{font-size:1.5rem;flex:none;line-height:1}
+  .disclaimer strong{color:var(--amber-soft)}
+  .disclaimer p{color:var(--ink);font-size:.97rem}
+
+  /* ---- generic grid ---- */
+  .grid{display:grid;gap:18px;margin-top:30px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;
+  }
+  .card .ic{
+    width:42px;height:42px;border-radius:10px;display:flex;align-items:center;
+    justify-content:center;font-size:1.3rem;margin-bottom:12px;
+    background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);
+  }
+  .card h3{color:var(--ink)}
+  .card p{font-size:.95rem}
+
+  /* ---- steps (how it works) ---- */
+  .steps{counter-reset:s;margin-top:30px;display:grid;gap:14px}
+  .step{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px 20px 70px;position:relative;
+  }
+  .step::before{
+    counter-increment:s;content:counter(s);
+    position:absolute;left:20px;top:20px;width:34px;height:34px;border-radius:9px;
+    background:var(--teal);color:#04201c;font-weight:800;font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .step h3{color:var(--ink)}
+  .step p{font-size:.96rem}
+
+  /* ---- install ---- */
+  .install-step{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;margin-top:18px;
+  }
+  .install-step .badge{
+    display:inline-block;background:var(--panel-2);border:1px solid var(--line);
+    color:var(--teal);font-weight:700;font-size:.78rem;border-radius:999px;
+    padding:4px 12px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;
+  }
+  .os-tabs{display:flex;gap:8px;margin:18px 0 4px;flex-wrap:wrap}
+  .os-tab{
+    background:var(--panel-2);border:1px solid var(--line);color:var(--ink-dim);
+    border-radius:9px;padding:9px 16px;cursor:pointer;font-weight:700;font-size:.92rem;
+    display:flex;align-items:center;gap:8px;
+  }
+  .os-tab[aria-selected="true"]{
+    background:var(--teal);color:#04201c;border-color:var(--teal);
+  }
+  .os-panel{display:none;margin-top:14px}
+  .os-panel.active{display:block}
+  .opt{
+    border:1px solid var(--line);border-radius:11px;padding:18px;margin-top:14px;
+    background:var(--bg-2);
+  }
+  .opt h4{color:var(--ink);font-size:1.04rem;margin-bottom:6px}
+  .opt .tag{font-size:.74rem;font-weight:700;color:var(--teal);
+    text-transform:uppercase;letter-spacing:.08em}
+  .opt ol,.opt ul{margin:8px 0 0 20px}
+  .opt li{color:var(--ink-dim);margin:5px 0;font-size:.95rem}
+  .opt li b{color:var(--ink)}
+
+  /* ---- table ---- */
+  .tbl{width:100%;border-collapse:collapse;margin-top:16px;font-size:.93rem}
+  .tbl th,.tbl td{
+    text-align:left;padding:10px 12px;border:1px solid var(--line);
+  }
+  .tbl th{background:var(--panel-2);color:var(--ink);font-size:.84rem;
+    text-transform:uppercase;letter-spacing:.05em}
+  .tbl td{color:var(--ink-dim);vertical-align:top}
+  .tbl td b{color:var(--ink)}
+
+  /* ---- accordion ---- */
+  details.faq{
+    background:var(--panel);border:1px solid var(--line);border-radius:11px;
+    padding:0;margin-top:12px;overflow:hidden;
+  }
+  details.faq summary{
+    list-style:none;cursor:pointer;padding:16px 20px;font-weight:700;
+    color:var(--ink);display:flex;justify-content:space-between;gap:14px;
+  }
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";color:var(--teal);font-size:1.3rem;line-height:1}
+  details.faq[open] summary::after{content:"\2013"}
+  details.faq .body{padding:0 20px 18px;color:var(--ink-dim);font-size:.96rem}
+  details.faq .body p+p{margin-top:8px}
+
+  /* ---- callouts ---- */
+  .note{
+    border-left:3px solid var(--teal);background:var(--panel);
+    border-radius:0 10px 10px 0;padding:14px 18px;margin-top:16px;font-size:.95rem;
+  }
+  .note.warn{border-left-color:var(--amber)}
+  .note b{color:var(--ink)}
+
+  /* ---- support ---- */
+  .support{
+    text-align:center;background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line);border-radius:var(--radius);padding:40px 24px;margin-top:30px;
+  }
+  .support h2{margin-bottom:.3em}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line);padding:34px 0 50px;color:var(--ink-mute);font-size:.9rem}
+  footer a{color:var(--ink-dim)}
+  .kofi-foot{
+    display:flex;align-items:center;gap:16px;background:var(--panel);
+    border:1px solid rgba(245,158,11,.34);border-radius:var(--radius);padding:18px 20px;
+  }
+  .kofi-foot span{color:var(--ink-dim);font-size:.93rem}
+  .kofi-emoji{font-size:1.9rem;flex:none;line-height:1}
+  .foot-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+  @media(max-width:620px){.kofi-foot{flex-direction:column;text-align:center}}
+
+  /* ---- to-top ---- */
+  #toTop{
+    position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:50%;
+    background:var(--teal);color:#04201c;border:0;font-size:1.2rem;cursor:pointer;
+    display:none;align-items:center;justify-content:center;font-weight:800;
+    box-shadow:0 6px 20px rgba(0,0,0,.4);
+  }
+  #toTop.show{display:flex}
+
+  @media(max-width:760px){
+    body{font-size:16px}
+    .nav-links{
+      display:none;position:absolute;top:57px;left:0;right:0;flex-direction:column;
+      gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:6px 0;
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:12px 22px;width:100%}
+    .nav-toggle{display:block}
+    .g2,.g3{grid-template-columns:1fr}
+    section{padding:54px 0}
+    .step{padding:18px 18px 18px 18px}
+    .step::before{position:static;margin-bottom:10px}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="ScanContext home">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="7" fill="#0f172a" stroke="#27375f"/>
+        <circle cx="16" cy="16" r="9" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+        <g stroke="#2dd4bf" stroke-width="2" stroke-linecap="round">
+          <line x1="16" y1="3" x2="16" y2="7.5"/><line x1="16" y1="24.5" x2="16" y2="29"/>
+          <line x1="3" y1="16" x2="7.5" y2="16"/><line x1="24.5" y1="16" x2="29" y2="16"/>
+        </g>
+        <circle cx="19.6" cy="12.6" r="3" fill="#f59e0b"/>
+      </svg>
+      ScanContext
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#what">What it is</a>
+      <a href="#how">How it works</a>
+      <a href="#why">Why use it</a>
+      <a href="#install">Install</a>
+      <a href="#ai">AI setup</a>
+      <a href="#faq">Help</a>
+      <a class="btn btn-primary btn-sm" href="#install" style="color:#04201c">Get ScanContext</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <span class="pill"><span class="dot"></span> Free &middot; Local-first &middot; Windows, macOS &amp; Linux</span>
+    <h1>Understand your medical scans <span class="accent">on your own computer</span>.</h1>
+    <p class="lead">
+      ScanContext is a free app that opens your medical images and reports,
+      organizes them, translates and summarizes them in plain language, and
+      helps you prepare clear questions for your doctor &mdash; all without
+      uploading anything.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#install">&#11015; Install ScanContext</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="os-detect" id="osDetect">Detecting your system&hellip;</p>
+
+    <div class="disclaimer">
+      <span class="ic">&#9888;&#65039;</span>
+      <p><strong>Not a medical device. Not a diagnosis.</strong> ScanContext
+      helps you organize, view, and understand medical imaging and reports. It
+      does <strong>not</strong> diagnose any condition. Every result &mdash;
+      especially anything AI-suggested &mdash; must be confirmed by a qualified
+      clinician.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT -->
+<section id="what">
+  <div class="wrap">
+    <p class="eyebrow">What it is</p>
+    <h2>A calm, private place for confusing medical files</h2>
+    <p class="lead">
+      A CD of scan images, a folder of DICOM files, a PDF report in a language
+      you don't read &mdash; medical records arrive in formats made for
+      hospitals, not for you. ScanContext opens all of them in one window,
+      keeps them on your machine, and explains them in plain language.
+    </p>
+    <div class="grid g3">
+      <div class="card">
+        <div class="ic">&#128274;</div>
+        <h3>100% local-first</h3>
+        <p>Runs on your own computer. Your scans and reports never leave it
+        unless you deliberately turn on a cloud AI provider.</p>
+      </div>
+      <div class="card">
+        <div class="ic">&#129657;</div>
+        <h3>For patients &amp; families</h3>
+        <p>No medical or technical background needed. Plain-language summaries,
+        guided tour, and a help button on every screen.</p>
+      </div>
+      <div class="card">
+        <div class="ic">&#129534;</div>
+        <h3>AI is optional</h3>
+        <p>ScanContext works fully without AI. When you choose to enable it,
+        results are always labelled "candidate findings, not a diagnosis".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2>From a pile of files to a clear conversation</h2>
+    <p class="lead">Five simple steps. You stay in control at every one.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Import your files</h3>
+        <p>Drop in DICOM studies, image files, ZIPs, PDFs, or text reports.
+        ScanContext sorts them into studies for you.</p>
+      </div>
+      <div class="step">
+        <h3>View &amp; annotate</h3>
+        <p>Open images and DICOM scans in a built-in viewer. Draw, mark, and
+        save annotations to remember what you want to ask about.</p>
+      </div>
+      <div class="step">
+        <h3>Extract &amp; translate</h3>
+        <p>Pull the text out of reports and, when needed, translate
+        non-English reports into English &mdash; right on your machine.</p>
+      </div>
+      <div class="step">
+        <h3>AI assist <em style="color:var(--ink-mute);font-style:normal;font-size:.85em">(optional)</em></h3>
+        <p>If you turn it on, AI summarizes reports and points to regions of an
+        image worth a closer look &mdash; always clearly marked as candidates,
+        never a diagnosis.</p>
+      </div>
+      <div class="step">
+        <h3>Export for your doctor</h3>
+        <p>Generate a tidy, doctor-friendly summary of the study and your
+        questions to bring to your appointment.</p>
+      </div>
+    </div>
+    <div class="note">
+      <b>Under the hood:</b> ScanContext runs as a small set of services inside
+      Docker on your computer &mdash; a viewer, a report engine, and a local
+      DICOM store. You never touch any of that; the app starts and stops it for
+      you.
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wrap">
+    <p class="eyebrow">Why use it</p>
+    <h2>The benefits, in plain terms</h2>
+    <div class="grid g3">
+      <div class="card"><div class="ic">&#127968;</div><h3>Your data stays home</h3>
+        <p>Nothing is uploaded by default. Files live in a folder on your
+        computer that you can see and back up.</p></div>
+      <div class="card"><div class="ic">&#128172;</div><h3>Plain language</h3>
+        <p>Turns dense radiology wording into something you can actually read,
+        and translates foreign-language reports.</p></div>
+      <div class="card"><div class="ic">&#129520;</div><h3>One viewer for everything</h3>
+        <p>DICOM, JPEGs, PDFs, ZIP archives, text reports &mdash; all opened in
+        one place, no extra software.</p></div>
+      <div class="card"><div class="ic">&#128176;</div><h3>Free to use</h3>
+        <p>Built by one independent developer. Free, with an optional small
+        donation if it helps you.</p></div>
+      <div class="card"><div class="ic">&#128187;</div><h3>Works everywhere</h3>
+        <p>Windows, macOS, and Linux &mdash; the same app, the same simple
+        steps on every system.</p></div>
+      <div class="card"><div class="ic">&#129701;</div><h3>You decide on AI</h3>
+        <p>AI is off until you switch it on, and you confirm cloud use for each
+        individual study.</p></div>
+      <div class="card"><div class="ic">&#128203;</div><h3>Ready for the doctor</h3>
+        <p>Walk into your appointment with an organized summary and a clear
+        list of questions.</p></div>
+      <div class="card"><div class="ic">&#128241;</div><h3>One-click app</h3>
+        <p>A desktop app with a tray / menu-bar icon starts and stops
+        ScanContext for you &mdash; no scripts to run.</p></div>
+      <div class="card"><div class="ic">&#9889;</div><h3>Fast after first run</h3>
+        <p>The first start downloads the app once. Every start after that is
+        quick.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<section id="install">
+  <div class="wrap">
+    <p class="eyebrow">Install &mdash; idiot-proof guide</p>
+    <h2>Get ScanContext running in three steps</h2>
+    <p class="lead">
+      No GitHub account and no source code needed. On Windows and macOS you
+      don't touch a terminal at all. Follow the steps in order &mdash; pick
+      <b>your</b> system in Step&nbsp;2.
+    </p>
+
+    <!-- step 1 -->
+    <div class="install-step">
+      <span class="badge">Step 1 &mdash; one time</span>
+      <h3>Install Docker Desktop (free)</h3>
+      <p>ScanContext runs inside Docker, so install Docker Desktop first. It is
+      free and you only ever do this once.</p>
+      <p style="margin-top:10px">
+        <a class="btn btn-ghost btn-sm" href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener">&#128011; Get Docker Desktop &#8599;</a>
+      </p>
+      <div class="note"><b>Then open Docker Desktop once</b> and wait until it
+      says <b>"running"</b>. Leave it running while you use ScanContext. That's
+      the whole of Step 1.</div>
+    </div>
+
+    <!-- step 2 -->
+    <div class="install-step">
+      <span class="badge">Step 2 &mdash; pick your system</span>
+      <h3>Download &amp; start ScanContext</h3>
+      <p>There are two ways to run it &mdash; the <b>app</b> (easiest) or a
+      <b>download bundle</b>. Choose whichever you like; both work the same once
+      open.</p>
+
+      <div class="os-tabs" role="tablist" aria-label="Operating system">
+        <button class="os-tab" role="tab" data-os="windows" aria-selected="false">&#129001; Windows</button>
+        <button class="os-tab" role="tab" data-os="mac" aria-selected="false">&#127822; macOS</button>
+        <button class="os-tab" role="tab" data-os="linux" aria-selected="false">&#128039; Linux</button>
+      </div>
+
+      <!-- WINDOWS -->
+      <div class="os-panel" data-os="windows">
+        <div class="opt">
+          <span class="tag">Option A &mdash; recommended</span>
+          <h4>The ScanContext app</h4>
+          <ol>
+            <li>On the <b>Releases page</b>, download <code>ScanContext_&lt;version&gt;_x64-setup.exe</code>.</li>
+            <li><b>Double-click</b> the installer and follow it through.</li>
+            <li>If a blue <b>SmartScreen</b> warning appears, click <b>More info</b> &rarr; <b>Run anyway</b> (only the first time &mdash; the app isn't code-signed yet).</li>
+            <li>Open <b>ScanContext</b> from the Start menu. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
+          </ol>
+        </div>
+        <div class="opt">
+          <span class="tag">Option B &mdash; no install</span>
+          <h4>The download bundle (.zip)</h4>
+          <ol>
+            <li>Download <code>ScanContext-&lt;version&gt;.zip</code> and unzip it anywhere (Desktop, Documents&hellip;).</li>
+            <li>Open the unzipped folder and <b>double-click <code>Start ScanContext.bat</code></b>.</li>
+            <li>First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
+          </ol>
+        </div>
+        <div class="note"><b>To stop it:</b> click <b>Stop</b> in the app, or
+        double-click <code>Stop ScanContext.bat</code> in the bundle folder.</div>
+      </div>
+
+      <!-- MAC -->
+      <div class="os-panel" data-os="mac">
+        <div class="opt">
+          <span class="tag">Option A &mdash; recommended</span>
+          <h4>The ScanContext app</h4>
+          <ol>
+            <li>On the <b>Releases page</b>, download <code>ScanContext_&lt;version&gt;_&lt;arch&gt;.dmg</code> (Apple Silicon or Intel).</li>
+            <li>Open the <code>.dmg</code> and <b>drag ScanContext into Applications</b>.</li>
+            <li>First launch: <b>right-click the app &rarr; Open &rarr; Open</b> (the app isn't code-signed yet &mdash; only needed once).</li>
+            <li>It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
+          </ol>
+        </div>
+        <div class="opt">
+          <span class="tag">Option B &mdash; no install</span>
+          <h4>The download bundle (.zip)</h4>
+          <ol>
+            <li>Download <code>ScanContext-&lt;version&gt;.zip</code> and unzip it anywhere.</li>
+            <li>Open the folder and <b>double-click <code>Start ScanContext.command</code></b>.</li>
+            <li>First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
+          </ol>
+        </div>
+        <div class="note"><b>To stop it:</b> click <b>Stop</b> in the app, or
+        run <code>sh ./stop.sh</code> in the bundle folder.</div>
+      </div>
+
+      <!-- LINUX -->
+      <div class="os-panel" data-os="linux">
+        <div class="opt">
+          <span class="tag">Option A &mdash; recommended</span>
+          <h4>The ScanContext app</h4>
+          <ol>
+            <li>On the <b>Releases page</b>, download <code>ScanContext_&lt;version&gt;_amd64.AppImage</code> &mdash; or the <code>.deb</code> / <code>.rpm</code> launcher for a click-only install.</li>
+            <li>For the AppImage: make it executable (<code>chmod +x</code>) then double-click it. For <code>.deb</code>/<code>.rpm</code>: install it like any package.</li>
+            <li>Open <b>ScanContext</b>. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
+          </ol>
+        </div>
+        <div class="opt">
+          <span class="tag">Option B &mdash; no install</span>
+          <h4>The download bundle (.zip)</h4>
+          <ol>
+            <li>Download <code>ScanContext-&lt;version&gt;.zip</code> and unzip it anywhere.</li>
+            <li>Open a terminal in the folder and run:</li>
+          </ol>
+          <pre><code>sh ./start.sh</code></pre>
+          <p style="font-size:.92rem">First start downloads the app (a few minutes); then your browser opens ScanContext.</p>
+        </div>
+        <div class="note"><b>To stop it:</b> click <b>Stop</b> in the app, or
+        run <code>sh ./stop.sh</code> in the bundle folder.</div>
+      </div>
+    </div>
+
+    <!-- step 3 -->
+    <div class="install-step">
+      <span class="badge">Step 3 &mdash; you're in</span>
+      <h3>Use ScanContext</h3>
+      <p>When it's ready, ScanContext opens in your web browser. A short
+      <b>guided tour</b> runs the first time &mdash; reopen help any time with
+      the <b>"?"</b> button in the top-right corner. Import a study and explore.
+      Your studies and data are always kept between runs.</p>
+    </div>
+
+    <div class="cta-row" style="margin-top:26px">
+      <a class="btn btn-primary" href="https://github.com/nikolareljin/scancontext/releases/latest" target="_blank" rel="noopener">&#11015; Open the Releases page &#8599;</a>
+      <a class="btn btn-ghost" href="#faq">Something not working?</a>
+    </div>
+    <p class="os-detect" style="margin-top:14px">All downloads &mdash; the app installers and the bundle &mdash; are on the Releases page above.</p>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section id="req">
+  <div class="wrap">
+    <p class="eyebrow">Before you start</p>
+    <h2>System requirements</h2>
+    <div class="grid g2">
+      <div class="card"><h3>You need</h3>
+        <ul style="margin:6px 0 0 18px;color:var(--ink-dim)">
+          <li>Windows 10/11, macOS 12 or newer, or a modern Linux desktop</li>
+          <li>Docker Desktop installed and running</li>
+          <li>About 4 GB free disk space, plus room for your studies</li>
+          <li>A modern browser &mdash; Chrome, Edge, Firefox, or Safari</li>
+        </ul>
+      </div>
+      <div class="card"><h3>Good to know</h3>
+        <ul style="margin:6px 0 0 18px;color:var(--ink-dim)">
+          <li>Internet is needed only for the one-time first download (and for cloud AI, if you enable it)</li>
+          <li>The app uses ports <code>5173</code> and <code>8000</code> on your machine</li>
+          <li>No account, no sign-up, no telemetry</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section id="ai">
+  <div class="wrap">
+    <p class="eyebrow">Optional</p>
+    <h2>Connect an AI provider</h2>
+    <p class="lead">
+      ScanContext works fully without AI. When you turn it on, it can summarize
+      reports, translate non-English reports, and suggest regions of an image
+      worth a closer look &mdash; always labelled "candidate findings, not a
+      diagnosis". <b>AI is off by default.</b>
+    </p>
+
+    <table class="tbl">
+      <thead><tr><th>Provider</th><th>What it is</th><th>Privacy notes</th></tr></thead>
+      <tbody>
+        <tr><td><b>Google Gemini</b></td><td>Recommended. Free tier to try; paid tier for real use.</td><td>Cloud. Anonymized data sent; paid tier required for genuine privacy.</td></tr>
+        <tr><td>Anthropic Claude</td><td>Paid cloud API.</td><td>Cloud. Anonymized data sent to Anthropic.</td></tr>
+        <tr><td>OpenAI</td><td>Paid cloud API.</td><td>Cloud. Anonymized data sent to OpenAI.</td></tr>
+        <tr><td><b>Ollama</b></td><td>Fully local AI &mdash; no key, no internet.</td><td>Nothing leaves your computer. Best for privacy.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note warn">
+      <b>Privacy &amp; the Gemini free tier.</b> ScanContext strips patient
+      identifiers before sending anything to a cloud provider &mdash; but on
+      Google Gemini's <b>free tier, Google may still use your anonymized images
+      and reports to improve its models</b>. Only the <b>paid tier</b> stops
+      that. For real medical data, use the paid tier &mdash; or use <b>Ollama</b>
+      to keep everything on your machine.
+    </div>
+
+    <h3 style="margin-top:28px;color:var(--ink)">Setting up Google Gemini</h3>
+    <ol style="margin:10px 0 0 20px;color:var(--ink-dim)">
+      <li><b>Get a key</b> at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> &mdash; sign in, click <b>Create API key</b>, copy it (starts with <code>AIza&hellip;</code>). Keep it private.</li>
+      <li><b>Turn on billing</b> (paid tier) in the key's Google Cloud project &mdash; see the warning above. You can set a budget cap.</li>
+      <li><b>Add the key</b> to ScanContext's <code>.env</code> file:</li>
+    </ol>
+    <pre><code>AI_PROVIDER=gemini
+CLOUD_AI_ENABLED=true
+GEMINI_API_KEY=AIza...your-key...
+GEMINI_MODEL=gemini-2.5-flash</code></pre>
+    <p style="font-size:.93rem">Where the <code>.env</code> file lives:</p>
+    <table class="tbl">
+      <thead><tr><th>How you installed</th><th><code>.env</code> location</th></tr></thead>
+      <tbody>
+        <tr><td>Download bundle (.zip)</td><td>Inside the unzipped <code>ScanContext-&lt;version&gt;</code> folder</td></tr>
+        <tr><td>App &mdash; Windows</td><td><code>%APPDATA%\com.nikolareljin.scancontext\.env</code></td></tr>
+        <tr><td>App &mdash; macOS</td><td><code>~/Library/Application Support/com.nikolareljin.scancontext/.env</code></td></tr>
+        <tr><td>App &mdash; Linux</td><td><code>~/.local/share/com.nikolareljin.scancontext/.env</code></td></tr>
+      </tbody>
+    </table>
+    <ol start="4" style="margin:14px 0 0 20px;color:var(--ink-dim)">
+      <li><b>Restart ScanContext</b> (Stop, then Start) so it loads the key. Then open a study and use <b>Analyze study</b> &mdash; you confirm cloud use per study.</li>
+    </ol>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card"><h3>Which Gemini model?</h3>
+        <p><code>gemini-2.5-flash</code> &mdash; cheap, fast, good for everyday
+        use (the default).<br><code>gemini-2.5-pro</code> &mdash; the most
+        thorough analysis.</p></div>
+      <div class="card"><h3>What does it cost?</h3>
+        <p>Cost per study is capped by design (about a dozen sampled images).
+        Roughly <b>2&ndash;3&cent;</b> per scan on Flash, <b>10&ndash;20&cent;</b>
+        on Pro. Even 100 studies a month is about <b>$2&ndash;3</b> on Flash.
+        Rates are set by Google.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow">Help</p>
+    <h2>Troubleshooting &amp; common questions</h2>
+
+    <details class="faq"><summary>It says "Docker is not installed" or "not running"</summary>
+      <div class="body"><p>Install Docker Desktop, open it, and wait until it
+      reports <b>"running"</b>. Then start ScanContext again. On macOS, make
+      sure Docker Desktop has been launched at least once.</p></div></details>
+
+    <details class="faq"><summary>The first start is taking a long time</summary>
+      <div class="body"><p>The very first run downloads the app images &mdash;
+      this can take a few minutes depending on your connection. Every start
+      after that is fast.</p></div></details>
+
+    <details class="faq"><summary>My system warns the app is unsafe / unknown</summary>
+      <div class="body"><p>The installers aren't code-signed yet, so you may
+      see a warning the first time. <b>macOS:</b> right-click the app &rarr;
+      <b>Open</b> &rarr; <b>Open</b>. <b>Windows:</b> on the SmartScreen prompt,
+      click <b>More info</b> &rarr; <b>Run anyway</b>. You only do this once.</p></div></details>
+
+    <details class="faq"><summary>A port is already in use</summary>
+      <div class="body"><p>ScanContext uses ports <code>5173</code> and
+      <code>8000</code>. If <code>5173</code> is taken, change
+      <code>FRONTEND_PORT</code> in the <code>.env</code> file and start again.
+      <code>8000</code> is built into the app and must stay free &mdash; close
+      whatever is using it rather than changing <code>BACKEND_PORT</code>.</p></div></details>
+
+    <details class="faq"><summary>Is my medical data uploaded anywhere?</summary>
+      <div class="body"><p>No &mdash; not by default. Everything stays on your
+      computer. Data is only ever sent out if <b>you</b> turn on a cloud AI
+      provider in Settings, and even then you confirm it per study. Use
+      <b>Ollama</b> to keep AI fully local too.</p></div></details>
+
+    <details class="faq"><summary>Can ScanContext tell me what's wrong with me?</summary>
+      <div class="body"><p>No. ScanContext is <b>not a medical device</b> and
+      does not diagnose anything. It helps you organize and understand your
+      files and prepare questions. Every result &mdash; especially anything
+      AI-suggested &mdash; must be confirmed by a qualified clinician.</p></div></details>
+
+    <details class="faq"><summary>Where are my files stored?</summary>
+      <div class="body"><p>In a <code>data/</code> folder on your computer. With
+      the bundle it's inside the unzipped folder; with the app it's in the
+      per-user app data folder. Your studies are kept between runs &mdash; keep
+      that folder and any exports private.</p></div></details>
+
+    <details class="faq"><summary>How do I stop it?</summary>
+      <div class="body"><p>In the app, click <b>Stop</b> (window or tray /
+      menu-bar icon). With the bundle, double-click <code>Stop ScanContext.bat</code>
+      on Windows, or run <code>sh ./stop.sh</code> on macOS / Linux.</p></div></details>
+
+    <details class="faq"><summary>Still stuck?</summary>
+      <div class="body"><p>Open an issue and describe what happened:
+      <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener">github.com/nikolareljin/scancontext/issues</a>.</p></div></details>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section id="privacy">
+  <div class="wrap">
+    <p class="eyebrow">Privacy &amp; safety</p>
+    <h2>What you should know</h2>
+    <div class="grid g2">
+      <div class="card"><h3>Safety</h3>
+        <p>ScanContext is not a diagnostic tool and not a substitute for
+        professional medical advice. Anything it shows &mdash; especially
+        AI-suggested findings &mdash; is a prompt for a conversation with your
+        doctor, never a conclusion.</p></div>
+      <div class="card"><h3>Privacy</h3>
+        <p>Medical files contain personal health information. ScanContext keeps
+        them on your machine; cloud AI is opt-in and strips identifiers first.
+        That anonymization only gives real privacy on a <b>paid</b> provider
+        plan &mdash; on a free tier, use Ollama for genuine medical data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section id="support">
+  <div class="wrap">
+    <div class="support">
+      <p class="eyebrow" style="display:block">Support the project</p>
+      <h2>ScanContext is free &mdash; and built by one person</h2>
+      <p class="lead" style="margin:0 auto 22px">
+        If it saved you time or worry, a one-time <b>$10 donation</b> keeps it
+        maintained and improving. Any amount helps.
+      </p>
+      <a class="btn btn-amber" href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener">&#9749; Donate on Ko-fi</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="flex-direction:column;align-items:stretch;gap:20px">
+    <div class="kofi-foot">
+      <span class="kofi-emoji" aria-hidden="true">&#9749;&#128155;</span>
+      <span>
+        <b style="color:var(--ink)">Was ScanContext useful? Help keep it going.</b>
+        ScanContext is completely free and built by one independent developer.
+        If it saved you time or worry, please consider a one-time $10 donation
+        &mdash; it directly funds maintenance, bug fixes, and new features. Any
+        amount helps.
+      </span>
+      <a class="btn btn-amber btn-sm" href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener" style="flex:none">&#9749; Donate $10 on Ko-fi</a>
+    </div>
+    <div class="foot-row">
+      <div>Built and maintained by <b style="color:var(--ink-dim)">Nik Reljin</b>. Not a medical device &mdash; not a diagnosis.</div>
+      <div>
+        <a href="https://github.com/nikolareljin/scancontext/releases/latest" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener">Report a problem</a> &nbsp;&middot;&nbsp;
+        <a href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener">Donate</a> &nbsp;&middot;&nbsp;
+        <a href="https://www.linkedin.com/in/nikolareljin" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">&#8593;</button>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- OS detection ----
+  function detectOS(){
+    var p=(navigator.platform||"").toLowerCase();
+    var u=(navigator.userAgent||"").toLowerCase();
+    if(/iphone|ipad|ipod/.test(u))return"mac";
+    if(p.indexOf("win")>-1||u.indexOf("windows")>-1)return"windows";
+    if(p.indexOf("mac")>-1||u.indexOf("mac os")>-1)return"mac";
+    if(p.indexOf("linux")>-1||u.indexOf("linux")>-1||u.indexOf("android")>-1)return"linux";
+    return null;
+  }
+  var labels={windows:"Windows",mac:"macOS",linux:"Linux"};
+  var os=detectOS();
+
+  var osDetect=document.getElementById("osDetect");
+  if(os){
+    osDetect.innerHTML="We detected <b>"+labels[os]+"</b> — the install steps below are ready for it.";
+  }else{
+    osDetect.textContent="Install steps for Windows, macOS, and Linux are below.";
+  }
+
+  // ---- OS tabs ----
+  var tabs=Array.prototype.slice.call(document.querySelectorAll(".os-tab"));
+  var panels=Array.prototype.slice.call(document.querySelectorAll(".os-panel"));
+  function selectOS(name){
+    tabs.forEach(function(t){t.setAttribute("aria-selected",String(t.dataset.os===name));});
+    panels.forEach(function(p){p.classList.toggle("active",p.dataset.os===name);});
+  }
+  tabs.forEach(function(t){
+    t.addEventListener("click",function(){selectOS(t.dataset.os);});
+  });
+  selectOS(os||"windows");
+
+  // ---- mobile nav ----
+  var toggle=document.querySelector(".nav-toggle");
+  var links=document.getElementById("navLinks");
+  toggle.addEventListener("click",function(){
+    var open=links.classList.toggle("open");
+    toggle.setAttribute("aria-expanded",String(open));
+  });
+  links.addEventListener("click",function(e){
+    if(e.target.tagName==="A"){links.classList.remove("open");
+      toggle.setAttribute("aria-expanded","false");}
+  });
+
+  // ---- back to top ----
+  var toTop=document.getElementById("toTop");
+  window.addEventListener("scroll",function(){
+    toTop.classList.toggle("show",window.scrollY>700);
+  },{passive:true});
+  toTop.addEventListener("click",function(){
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+})();
+</script>
+</body>
+</html>

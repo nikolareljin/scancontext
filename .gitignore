@@ -1,7 +1,14 @@
 # Public distribution repo — it must NEVER contain credentials, source code,
 # or CI workflows. Deny everything by default and explicitly allow only the
-# two files this repo is meant to track; release bundles are attached as
+# files this repo is meant to track; release bundles are attached as
 # Release assets, never committed.
+#
+# The docs/ folder is the GitHub Pages landing site (static SPA only).
 *
 !README.md
 !.gitignore
+!docs/
+docs/*
+!docs/index.html
+!docs/favicon.svg
+!docs/.nojekyll
