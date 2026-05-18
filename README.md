@@ -23,7 +23,9 @@ Linux.
 
 ## ⬇️ Download & install
 
-No GitHub account, no source code, and no terminal needed.
+No GitHub account and no source code needed — and on Windows and macOS, no
+terminal either. On Linux the bundle uses a short `sh ./start.sh` command, or
+install the `.deb` / `.rpm` launcher for a click-only setup.
 
 There are **two ways to run ScanContext** — pick whichever you prefer. Both
 need Docker Desktop, so do Step 1 either way.
