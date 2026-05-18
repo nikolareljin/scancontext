@@ -10,6 +10,9 @@ Linux.
 > condition. Every result — especially anything AI-suggested — must be
 > confirmed by a qualified clinician.
 
+<img width="1900" height="841" alt="image" src="https://github.com/user-attachments/assets/99b8ed13-2ca9-4af6-a96a-1c2799edf3e9" />
+
+
 **Quick links:**
 [⬇️ Download](https://github.com/nikolareljin/scancontext/releases/latest) ·
 [🐳 Docker Desktop](https://www.docker.com/products/docker-desktop/) ·
