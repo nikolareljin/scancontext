@@ -59,8 +59,9 @@ no scripts, no files to manage. Download the installer for your system:
 | Linux   | `ScanContext_<version>_amd64.AppImage` | `chmod +x` the file, then double-click — or install the `.deb` / `.rpm` |
 
 Then open **ScanContext** like any other app. It checks Docker, downloads the
-app on first run, and opens it in your browser. Use the window — or the tray /
-menu-bar icon — to **Start**, **Stop**, and **Open** ScanContext any time.
+app on first run, and starts it. When it is ready, click **Open ScanContext**
+to launch it in your browser. Use the window — or the tray / menu-bar icon —
+to **Start**, **Stop**, and **Open** ScanContext any time.
 
 > **First launch — unsigned app warning.** These installers are not yet
 > code-signed, so your system may warn you the first time:
