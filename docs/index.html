@@ -79,6 +79,13 @@
   .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
   .btn-amber{background:var(--amber);color:#3a2400}
   .btn-sm{padding:8px 14px;font-size:.86rem;border-radius:8px}
+  .dl-row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 4px}
+  .ver{
+    display:inline-block;font-size:.6em;font-weight:700;color:var(--teal);
+    background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);
+    border-radius:999px;padding:3px 11px;vertical-align:middle;margin-left:10px;
+    text-transform:uppercase;letter-spacing:.06em;
+  }
 
   /* ---- hero ---- */
   .hero{
@@ -108,6 +115,17 @@
   .disclaimer .ic{font-size:1.5rem;flex:none;line-height:1}
   .disclaimer strong{color:var(--amber-soft)}
   .disclaimer p{color:var(--ink);font-size:.97rem}
+
+  /* ---- screenshot ---- */
+  .shot{
+    margin-top:34px;border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;background:var(--panel);box-shadow:0 22px 55px rgba(0,0,0,.5);
+  }
+  .shot img{display:block;width:100%;height:auto}
+  .shot figcaption{
+    padding:10px 16px;font-size:.84rem;color:var(--ink-mute);
+    border-top:1px solid var(--line);text-align:center;
+  }
 
   /* ---- generic grid ---- */
   .grid{display:grid;gap:18px;margin-top:30px}
@@ -295,6 +313,13 @@
     </div>
     <p class="os-detect" id="osDetect">Detecting your system&hellip;</p>
 
+    <figure class="shot">
+      <img src="https://github.com/user-attachments/assets/99b8ed13-2ca9-4af6-a96a-1c2799edf3e9"
+           width="1900" height="841" loading="lazy"
+           alt="The ScanContext app showing a medical study with the image viewer and the report panel side by side.">
+      <figcaption>ScanContext in action &mdash; your studies, viewer, and reports together in one window.</figcaption>
+    </figure>
+
     <div class="disclaimer">
       <span class="ic">&#9888;&#65039;</span>
       <p><strong>Not a medical device. Not a diagnosis.</strong> ScanContext
@@ -423,12 +448,13 @@
 <!-- INSTALL -->
 <section id="install">
   <div class="wrap">
-    <p class="eyebrow">Install &mdash; idiot-proof guide</p>
+    <p class="eyebrow">Install &mdash; a friendly step-by-step guide</p>
     <h2>Get ScanContext running in three steps</h2>
     <p class="lead">
-      No GitHub account and no source code needed. On Windows and macOS you
-      don't touch a terminal at all. Follow the steps in order &mdash; pick
-      <b>your</b> system in Step&nbsp;2.
+      No GitHub account and no source code needed, and we'll walk you through
+      every step. On Windows and macOS you don't touch a terminal at all.
+      Please follow the steps in order &mdash; just pick your system in
+      Step&nbsp;2.
     </p>
 
     <!-- step 1 -->
@@ -448,10 +474,11 @@
     <!-- step 2 -->
     <div class="install-step">
       <span class="badge">Step 2 &mdash; pick your system</span>
-      <h3>Download &amp; start ScanContext</h3>
+      <h3>Download &amp; start ScanContext <span class="ver">latest: v0.4.0</span></h3>
       <p>There are two ways to run it &mdash; the <b>app</b> (easiest) or a
-      <b>download bundle</b>. Choose whichever you like; both work the same once
-      open.</p>
+      <b>download bundle</b>. Choose whichever you prefer; both work the same
+      once open. The buttons below download the file directly &mdash; there's
+      no other page to visit.</p>
 
       <div class="os-tabs" role="tablist" aria-label="Operating system">
         <button class="os-tab" role="tab" data-os="windows" aria-selected="false">&#129001; Windows</button>
@@ -464,9 +491,13 @@
         <div class="opt">
           <span class="tag">Option A &mdash; recommended</span>
           <h4>The ScanContext app</h4>
+          <p>A small desktop app that starts and stops ScanContext for you.</p>
+          <div class="dl-row">
+            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_x64-setup.exe">&#11015; Download for Windows &mdash; installer (.exe)</a>
+            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_x64_en-US.msi">&#11015; .msi alternative</a>
+          </div>
           <ol>
-            <li>On the <b>Releases page</b>, download <code>ScanContext_&lt;version&gt;_x64-setup.exe</code>.</li>
-            <li><b>Double-click</b> the installer and follow it through.</li>
+            <li><b>Double-click</b> the downloaded installer and follow it through.</li>
             <li>If a blue <b>SmartScreen</b> warning appears, click <b>More info</b> &rarr; <b>Run anyway</b> (only the first time &mdash; the app isn't code-signed yet).</li>
             <li>Open <b>ScanContext</b> from the Start menu. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
           </ol>
@@ -474,8 +505,12 @@
         <div class="opt">
           <span class="tag">Option B &mdash; no install</span>
           <h4>The download bundle (.zip)</h4>
+          <p>No installer &mdash; just unzip and double-click a start file.</p>
+          <div class="dl-row">
+            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0.zip">&#11015; Download bundle &mdash; ScanContext-0.4.0.zip</a>
+          </div>
           <ol>
-            <li>Download <code>ScanContext-&lt;version&gt;.zip</code> and unzip it anywhere (Desktop, Documents&hellip;).</li>
+            <li>Unzip it anywhere (Desktop, Documents&hellip;).</li>
             <li>Open the unzipped folder and <b>double-click <code>Start ScanContext.bat</code></b>.</li>
             <li>First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
           </ol>
@@ -487,20 +522,27 @@
       <!-- MAC -->
       <div class="os-panel" data-os="mac">
         <div class="opt">
-          <span class="tag">Option A &mdash; recommended</span>
+          <span class="tag">Option A &mdash; recommended (Apple Silicon)</span>
           <h4>The ScanContext app</h4>
+          <p>For Apple Silicon Macs (M1/M2/M3 and newer). On an Intel Mac, please use Option B below.</p>
+          <div class="dl-row">
+            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_aarch64.dmg">&#11015; Download for macOS &mdash; Apple Silicon (.dmg)</a>
+          </div>
           <ol>
-            <li>On the <b>Releases page</b>, download <code>ScanContext_&lt;version&gt;_&lt;arch&gt;.dmg</code> (Apple Silicon or Intel).</li>
             <li>Open the <code>.dmg</code> and <b>drag ScanContext into Applications</b>.</li>
             <li>First launch: <b>right-click the app &rarr; Open &rarr; Open</b> (the app isn't code-signed yet &mdash; only needed once).</li>
             <li>It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
           </ol>
         </div>
         <div class="opt">
-          <span class="tag">Option B &mdash; no install</span>
+          <span class="tag">Option B &mdash; no install (any Mac)</span>
           <h4>The download bundle (.zip)</h4>
+          <p>Works on both Apple Silicon and Intel Macs.</p>
+          <div class="dl-row">
+            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0.zip">&#11015; Download bundle &mdash; ScanContext-0.4.0.zip</a>
+          </div>
           <ol>
-            <li>Download <code>ScanContext-&lt;version&gt;.zip</code> and unzip it anywhere.</li>
+            <li>Unzip it anywhere.</li>
             <li>Open the folder and <b>double-click <code>Start ScanContext.command</code></b>.</li>
             <li>First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
           </ol>
@@ -514,25 +556,39 @@
         <div class="opt">
           <span class="tag">Option A &mdash; recommended</span>
           <h4>The ScanContext app</h4>
+          <p>Pick the package for your distribution &mdash; or the portable AppImage.</p>
+          <div class="dl-row">
+            <a class="btn btn-primary btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_amd64.AppImage">&#11015; AppImage (portable)</a>
+            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext_0.4.0_amd64.deb">&#11015; .deb (Debian / Ubuntu)</a>
+            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0-1.x86_64.rpm">&#11015; .rpm (Fedora / RHEL)</a>
+          </div>
           <ol>
-            <li>On the <b>Releases page</b>, download <code>ScanContext_&lt;version&gt;_amd64.AppImage</code> &mdash; or the <code>.deb</code> / <code>.rpm</code> launcher for a click-only install.</li>
-            <li>For the AppImage: make it executable (<code>chmod +x</code>) then double-click it. For <code>.deb</code>/<code>.rpm</code>: install it like any package.</li>
+            <li><b>AppImage:</b> make it executable (<code>chmod +x</code>) then double-click it. <b>.deb / .rpm:</b> install it like any package.</li>
             <li>Open <b>ScanContext</b>. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
           </ol>
         </div>
         <div class="opt">
-          <span class="tag">Option B &mdash; no install</span>
-          <h4>The download bundle (.zip)</h4>
-          <ol>
-            <li>Download <code>ScanContext-&lt;version&gt;.zip</code> and unzip it anywhere.</li>
-            <li>Open a terminal in the folder and run:</li>
-          </ol>
-          <pre><code>sh ./start.sh</code></pre>
+          <span class="tag">Option B &mdash; terminal (always gets the latest)</span>
+          <h4>One-line install with <code>curl</code></h4>
+          <p>Prefer the terminal? This always fetches the most recent release &mdash; no version numbers to track. Paste it into a terminal:</p>
+          <pre><code>curl -fsSL "$(curl -fsSL https://api.github.com/repos/nikolareljin/scancontext/releases/latest \
+  | grep -oE '"browser_download_url":[^,]*\.zip"' | cut -d'"' -f4)" -o ScanContext.zip \
+  &amp;&amp; unzip -q ScanContext.zip &amp;&amp; cd ScanContext-* &amp;&amp; sh ./start.sh</code></pre>
+          <p style="font-size:.92rem">To download the AppImage instead, swap <code>\.zip"</code> for <code>\.AppImage"</code> in the command above.</p>
+          <p style="font-size:.92rem">Or download the bundle by hand:</p>
+          <div class="dl-row">
+            <a class="btn btn-ghost btn-sm" href="https://github.com/nikolareljin/scancontext/releases/download/0.4.0/ScanContext-0.4.0.zip">&#11015; ScanContext-0.4.0.zip</a>
+          </div>
           <p style="font-size:.92rem">First start downloads the app (a few minutes); then your browser opens ScanContext.</p>
         </div>
         <div class="note"><b>To stop it:</b> click <b>Stop</b> in the app, or
         run <code>sh ./stop.sh</code> in the bundle folder.</div>
       </div>
+
+      <div class="note"><b>Looking for a previous version, or a different
+      file?</b> Every release &mdash; current and older &mdash; with all of its
+      downloads is listed here:
+      <a href="https://github.com/nikolareljin/scancontext/releases" target="_blank" rel="noopener">all ScanContext releases &#8599;</a></div>
     </div>
 
     <!-- step 3 -->
@@ -546,10 +602,10 @@
     </div>
 
     <div class="cta-row" style="margin-top:26px">
-      <a class="btn btn-primary" href="https://github.com/nikolareljin/scancontext/releases/latest" target="_blank" rel="noopener">&#11015; Open the Releases page &#8599;</a>
-      <a class="btn btn-ghost" href="#faq">Something not working?</a>
+      <a class="btn btn-ghost" href="https://github.com/nikolareljin/scancontext/releases" target="_blank" rel="noopener">&#128230; Browse all releases (incl. previous) &#8599;</a>
+      <a class="btn btn-ghost" href="#faq">Need a hand? See Help</a>
     </div>
-    <p class="os-detect" style="margin-top:14px">All downloads &mdash; the app installers and the bundle &mdash; are on the Releases page above.</p>
+    <p class="os-detect" style="margin-top:14px">The download buttons above link straight to the v0.4.0 files. Older versions are on the all-releases page.</p>
   </div>
 </section>
 
