@@ -897,7 +897,9 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
     "linux-appimage":/\.AppImage$/i,
     "linux-deb":/\.deb$/i,
     "linux-rpm":/\.rpm$/i,
-    "bundle-zip":/\.zip$/i
+    // Anchored to the product name so a future SBOM/symbols/debug .zip
+    // asset can't be picked instead of the app bundle.
+    "bundle-zip":/^scancontext\b.*\.zip$/i
   };
   function applyRelease(rel){
     if(!rel||!rel.assets||!rel.assets.length)return;
@@ -922,7 +924,10 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
       var raw=window.localStorage.getItem(CACHE_KEY);
       if(!raw)return null;
       var obj=JSON.parse(raw);
-      if(!obj||(Date.now()-obj.savedAt)>CACHE_TTL)return null;
+      // Reject malformed entries: a missing/non-numeric savedAt would make
+      // the staleness check NaN (never "stale"), serving a corrupt cache.
+      if(!obj||typeof obj.savedAt!=="number"||!obj.release)return null;
+      if((Date.now()-obj.savedAt)>CACHE_TTL)return null;
       return obj.release;
     }catch(e){return null;}
   }
