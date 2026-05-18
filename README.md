@@ -221,12 +221,11 @@ of a cent. Prices are set by Google; current rates: <https://ai.google.dev/prici
 - **The app says Docker is missing but it is installed (macOS).** Make sure
   Docker Desktop has been launched at least once; the ScanContext app looks for
   it in the standard locations.
-- **A port is already in use.** ScanContext uses ports `5173`, `8000`, and
-  `8042` on your machine. If `5173` is taken, change `FRONTEND_PORT` in the
-  `.env` file and start again. The backend (`8000`) and Orthanc (`8042`) ports
-  are built into the app, so changing `BACKEND_PORT` / `ORTHANC_PORT` only
-  moves the containers and breaks the browser app — if one of those ports is
-  taken, free it up instead.
+- **A port is already in use.** The packaged app uses ports `5173` and `8000`
+  on your machine (Orthanc runs internally and is not exposed). If `5173` is
+  taken, change `FRONTEND_PORT` in the `.env` file and start again. `8000` is
+  built into the app and must stay free — if it is occupied, free it rather
+  than changing `BACKEND_PORT`.
 - **First start is slow.** The first run downloads the app images (a few
   minutes). Later starts are fast.
 - **Still stuck?** Open an issue:
