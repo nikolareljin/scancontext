@@ -10,11 +10,9 @@ Linux.
 > condition. Every result — especially anything AI-suggested — must be
 > confirmed by a qualified clinician.
 
-<img width="1900" height="841" alt="image" src="https://github.com/user-attachments/assets/99b8ed13-2ca9-4af6-a96a-1c2799edf3e9" />
-
-
 **Quick links:**
 [⬇️ Download](https://github.com/nikolareljin/scancontext/releases/latest) ·
+[🎬 See it in action](#-see-scancontext-in-action) ·
 [🐳 Docker Desktop](https://www.docker.com/products/docker-desktop/) ·
 [🐞 Report a problem](https://github.com/nikolareljin/scancontext/issues) ·
 [☕ Donate](https://ko-fi.com/nikolareljin)
@@ -125,6 +123,78 @@ explicitly turn on a cloud AI provider in Settings. AI is **off by default**.
 
 ---
 
+## 🎬 See ScanContext in action
+
+Everything below is a real walkthrough of ScanContext, captured from the
+built-in **demo study** — a fully fictional CT chest scan with invented
+patient details. No real medical data is shown anywhere.
+
+▶️ **[Watch the full walkthrough (~60 seconds)](showcase/video/walkthrough.webm)**
+
+### First run — a guided tour
+
+New users get a short guided tour the first time they open ScanContext.
+
+![First-run guided tour](showcase/screenshots/01-guided-tour.png)
+
+### Your studies at a glance
+
+The dashboard lists every study you have imported, with import status and the
+active AI provider.
+
+![Dashboard](showcase/screenshots/02-dashboard.png)
+
+### Review images
+
+Open a study to scroll through slices, zoom, and adjust window/level in the
+built-in viewer.
+
+![Image viewer](showcase/screenshots/04-viewer-slice.png)
+
+### Annotate findings
+
+Mark regions yourself, or accept AI-suggested candidate regions. Confirmed
+marks show solid blue; AI suggestions awaiting your review show dotted amber.
+
+![Annotations overlaid on a slice](showcase/screenshots/09-viewer-annotations.png)
+
+![Annotations list](showcase/screenshots/08-annotations.png)
+
+### Read and translate reports
+
+Imported reports are shown exactly as received, with optional English
+translation and an AI summary.
+
+![Original report](showcase/screenshots/07-reports.png)
+
+### Optional AI review
+
+Turn on an AI provider and let ScanContext analyze a study — it picks the most
+relevant slices and suggests regions worth a closer look, always labeled
+"candidate findings, not a diagnosis".
+
+![AI review](showcase/screenshots/10-ai-review.png)
+
+### Export to share with a doctor
+
+Export a study as a doctor-friendly ZIP — a readable report plus the marked
+images. Tick **Anonymize** to strip patient names, institutions, and dates
+before the file leaves your machine.
+
+![Export with anonymize](showcase/screenshots/12-export-anonymize.png)
+
+### Help, any time
+
+A built-in Help drawer has guides, an FAQ, a safety summary, and a button to
+replay the guided tour.
+
+![Help drawer](showcase/screenshots/14-help-drawer.png)
+
+> The complete screenshot set is in
+> [`showcase/screenshots/`](showcase/screenshots/).
+
+---
+
 ## Optional — connect an AI provider
 
 AI is **off by default** and entirely optional — ScanContext works fully
@@ -230,6 +300,31 @@ of a cent. Prices are set by Google; current rates: <https://ai.google.dev/prici
   minutes). Later starts are fast.
 - **Still stuck?** Open an issue:
   <https://github.com/nikolareljin/scancontext/issues>
+
+### Windows: Docker Desktop won't start (virtualisation not detected)
+
+If Docker Desktop shows *"failed to start because virtualisation support wasn't
+detected"*, it is a Windows / PC setup issue. Two independent fixes — most
+people only need one:
+
+**Fix A — turn on virtualization in your PC's BIOS/UEFI.** Restart and press
+the setup key shown on the boot screen (usually **Del**, **F2**, **F10**, or
+**Esc**). Find the virtualization setting — Intel: *Intel Virtualization
+Technology* / *VT-x*; AMD: *SVM Mode* / *AMD-V* (under Advanced, CPU
+Configuration, or Security) — set it **Enabled**, save & exit, and reopen
+Docker Desktop.
+
+**Fix B — repair the Windows features and WSL.**
+
+1. Press the Windows key, type `Windows features`, open **Turn Windows features
+   on or off**, **untick Hyper-V and Virtual Machine Platform**, click OK and
+   **restart**.
+2. Open **Windows PowerShell** (Search box → type `Windows PowerShell`) and run
+   `wsl --update`. If it says WSL is not installed, run `wsl --install`
+   (right-click PowerShell → *Run as administrator*) and **restart**.
+3. Open Docker Desktop and click **Try Again**.
+
+Docker's own guide: <https://docs.docker.com/desktop/troubleshoot-and-support/>
 
 ---
 

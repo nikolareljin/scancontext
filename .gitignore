@@ -12,3 +12,12 @@ docs/*
 !docs/index.html
 !docs/favicon.svg
 !docs/.nojekyll
+
+# Showcase / demo assets shown in the README. Only screenshot (.png) and
+# walkthrough video (.webm) files are allowed — never source or credentials.
+# Captured from the fully fictional demo study, so they contain no real PHI.
+!showcase/
+!showcase/screenshots/
+!showcase/screenshots/*.png
+!showcase/video/
+!showcase/video/*.webm
