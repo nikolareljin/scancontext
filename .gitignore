@@ -3,7 +3,10 @@
 # files this repo is meant to track; release bundles are attached as
 # Release assets, never committed.
 #
-# The docs/ folder is the GitHub Pages landing site (static SPA only).
+# This file is the source of truth for the public repo's .gitignore — the
+# publish-landing workflow syncs it along with README.md and docs/.
+#
+# The docs/ folder is the GitHub Pages landing site (static SPA + showcase).
 *
 !README.md
 !.gitignore
@@ -12,3 +15,12 @@ docs/*
 !docs/index.html
 !docs/favicon.svg
 !docs/.nojekyll
+
+# Showcase / demo assets shown on the site. Only screenshot (.png) and
+# walkthrough video (.webm) files are allowed — never source or credentials.
+# Captured from the fully fictional demo study, so they contain no real PHI.
+!docs/showcase/
+!docs/showcase/screenshots/
+!docs/showcase/screenshots/*.png
+!docs/showcase/video/
+!docs/showcase/video/*.webm

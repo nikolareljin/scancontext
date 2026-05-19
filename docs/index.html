@@ -127,6 +127,23 @@
     border-top:1px solid var(--line);text-align:center;
   }
 
+  /* ---- demo video + screenshot gallery ---- */
+  .demo-video{
+    margin-top:30px;border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;background:#000;box-shadow:0 22px 55px rgba(0,0,0,.5);
+  }
+  .demo-video video{display:block;width:100%;height:auto}
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
+  .gallery figure{
+    border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    background:var(--panel);
+  }
+  .gallery img{display:block;width:100%;height:auto}
+  .gallery figcaption{
+    padding:10px 14px;font-size:.84rem;color:var(--ink-mute);
+    border-top:1px solid var(--line);
+  }
+
   /* ---- generic grid ---- */
   .grid{display:grid;gap:18px;margin-top:30px}
   .g2{grid-template-columns:repeat(2,1fr)}
@@ -260,7 +277,7 @@
     .nav-links.open{display:flex}
     .nav-links a{padding:12px 22px;width:100%}
     .nav-toggle{display:block}
-    .g2,.g3{grid-template-columns:1fr}
+    .g2,.g3,.gallery{grid-template-columns:1fr}
     section{padding:54px 0}
     .step{padding:18px 18px 18px 18px}
     .step::before{position:static;margin-bottom:10px}
@@ -287,6 +304,7 @@
     <nav class="nav-links" id="navLinks">
       <a href="#what">What it is</a>
       <a href="#how">How it works</a>
+      <a href="#tour">See it</a>
       <a href="#why">Why use it</a>
       <a href="#install">Install</a>
       <a href="#ai">AI setup</a>
@@ -404,6 +422,62 @@
       Docker on your computer &mdash; a viewer, a report engine, and a local
       DICOM store. You never touch any of that; the app starts and stops it for
       you.
+    </div>
+  </div>
+</section>
+
+<!-- TOUR -->
+<section id="tour">
+  <div class="wrap">
+    <p class="eyebrow">See it in action</p>
+    <h2>A look inside ScanContext</h2>
+    <p class="lead">
+      Everything below is the real app, captured from its built-in demo study
+      &mdash; a fully fictional CT chest scan with invented patient details. No
+      real medical data is shown.
+    </p>
+
+    <figure class="demo-video">
+      <video controls preload="metadata"
+             poster="showcase/screenshots/02-dashboard.png"
+             width="1440" height="900">
+        <source src="showcase/video/walkthrough.webm" type="video/webm">
+        Your browser can't play this video &mdash;
+        <a href="showcase/video/walkthrough.webm">download the walkthrough</a>.
+      </video>
+    </figure>
+
+    <div class="gallery">
+      <figure>
+        <img src="showcase/screenshots/02-dashboard.png" loading="lazy"
+             alt="ScanContext dashboard listing the demo study.">
+        <figcaption>Your studies, with import status and AI provider at a glance.</figcaption>
+      </figure>
+      <figure>
+        <img src="showcase/screenshots/04-viewer-slice.png" loading="lazy"
+             alt="The ScanContext image viewer showing a CT slice.">
+        <figcaption>Scroll slices, zoom, and adjust window/level in the viewer.</figcaption>
+      </figure>
+      <figure>
+        <img src="showcase/screenshots/09-viewer-annotations.png" loading="lazy"
+             alt="A CT slice with an annotation box overlaid.">
+        <figcaption>Confirmed marks in solid blue; AI suggestions in dotted amber.</figcaption>
+      </figure>
+      <figure>
+        <img src="showcase/screenshots/07-reports.png" loading="lazy"
+             alt="The report panel showing an imported radiology report.">
+        <figcaption>Reports shown as imported, with optional translation and summary.</figcaption>
+      </figure>
+      <figure>
+        <img src="showcase/screenshots/10-ai-review.png" loading="lazy"
+             alt="The AI review tab with the Analyze study action.">
+        <figcaption>Optional AI review &mdash; candidate findings, never a diagnosis.</figcaption>
+      </figure>
+      <figure>
+        <img src="showcase/screenshots/12-export-anonymize.png" loading="lazy"
+             alt="The export tab with the Anonymize option enabled.">
+        <figcaption>Export a doctor-friendly ZIP &mdash; anonymized if you choose.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -713,6 +787,27 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
       <div class="body"><p>Install Docker Desktop, open it, and wait until it
       reports <b>"running"</b>. Then start ScanContext again. On macOS, make
       sure Docker Desktop has been launched at least once.</p></div></details>
+
+    <details class="faq"><summary>Windows: Docker Desktop won't start (virtualisation not detected)</summary>
+      <div class="body">
+      <p>If Docker Desktop reports <i>"failed to start because virtualisation
+      support wasn't detected"</i>, it is a Windows / PC setup issue. Two
+      independent fixes &mdash; most people need only one.</p>
+      <p><b>Fix A &mdash; turn on virtualization in your PC's BIOS/UEFI.</b>
+      Restart and press the setup key shown on the boot screen (often
+      <b>Del</b>, <b>F2</b>, <b>F10</b>, or <b>Esc</b>). Find the virtualization
+      setting &mdash; Intel: <i>Intel Virtualization Technology</i> / <i>VT-x</i>;
+      AMD: <i>SVM Mode</i> / <i>AMD-V</i> &mdash; set it <b>Enabled</b>, save
+      &amp; exit, and reopen Docker Desktop.</p>
+      <p><b>Fix B &mdash; repair the Windows features and WSL.</b> Open <b>Turn
+      Windows features on or off</b>, untick <b>Hyper-V</b> and <b>Virtual
+      Machine Platform</b>, click OK and restart. Then open <b>Windows
+      PowerShell</b> and run <code>wsl --update</code> (if WSL is not installed,
+      run <code>wsl --install</code> as administrator) and restart. Open Docker
+      Desktop and click <b>Try Again</b>.</p>
+      <p>Docker's own guide:
+      <a href="https://docs.docker.com/desktop/troubleshoot-and-support/" target="_blank" rel="noopener">docker.com troubleshooting &#8599;</a>.</p>
+      </div></details>
 
     <details class="faq"><summary>The first start is taking a long time</summary>
       <div class="body"><p>The very first run downloads the app images &mdash;
