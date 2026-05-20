@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy &mdash; ScanContext</title>
+<meta name="description" content="ScanContext privacy policy: what data is collected, what is not, and how your medical files stay on your machine.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  :root{
+    --bg:#0f172a; --bg-2:#111d36; --panel:#16223f; --panel-2:#1c2c4f;
+    --line:#27375f; --ink:#e6edf7; --ink-dim:#9fb0cc; --ink-mute:#6f81a3;
+    --teal:#2dd4bf; --teal-deep:#0d9488; --amber:#f59e0b; --amber-soft:#fbbf24;
+    --radius:14px; --maxw:1080px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
+  body{
+    background:var(--bg);color:var(--ink);font-family:var(--font);
+    line-height:1.62;font-size:17px;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{line-height:1.2;letter-spacing:-.02em}
+  h2{font-size:clamp(1.4rem,2.8vw,2rem);margin-bottom:.5em;color:var(--ink)}
+  h3{font-size:1.1rem;margin-bottom:.35em;color:var(--ink)}
+  p{color:var(--ink-dim)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .lead{font-size:1.08rem;max-width:62ch}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;
+    font-weight:700;color:var(--teal);margin-bottom:.6em;
+  }
+
+  /* ---- nav ---- */
+  header.nav{
+    position:sticky;top:0;z-index:50;background:rgba(15,23,42,.92);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;gap:18px;max-width:var(--maxw);
+    margin:0 auto;padding:12px 22px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;
+    font-size:1.06rem;color:var(--ink);letter-spacing:-.02em}
+  .brand:hover{text-decoration:none}
+  .brand svg{width:30px;height:30px;flex:none}
+  .nav-links{display:flex;gap:22px;margin-left:auto;align-items:center}
+  .nav-links a{color:var(--ink-dim);font-size:.93rem;font-weight:600}
+  .nav-links a:hover{color:var(--ink);text-decoration:none}
+
+  /* ---- page layout ---- */
+  .page-hero{
+    padding:64px 0 48px;
+    background:radial-gradient(700px 320px at 80% -10%,rgba(45,212,191,.12),transparent 60%),
+               radial-gradient(500px 280px at 4% 8%,rgba(245,158,11,.07),transparent 62%);
+    border-bottom:1px solid var(--line);
+  }
+  .back-link{
+    display:inline-flex;align-items:center;gap:6px;color:var(--ink-dim);
+    font-size:.9rem;font-weight:600;margin-bottom:28px;
+  }
+  .back-link:hover{color:var(--ink);text-decoration:none}
+  .back-link::before{content:"←";font-size:1rem}
+  .page-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:.3em}
+  .meta{color:var(--ink-mute);font-size:.88rem;margin-top:10px}
+
+  /* ---- content ---- */
+  .content{max-width:740px;padding:0 22px;margin:0 auto}
+  .content section{padding:48px 0;border-top:1px solid var(--line)}
+  .content section:first-child{border-top:0;padding-top:52px}
+  .content p+p{margin-top:.9em}
+  .content ul{margin:10px 0 0 20px;list-style:disc}
+  .content ul li{color:var(--ink-dim);margin:5px 0;font-size:.97rem}
+  .content ul li b{color:var(--ink)}
+
+  /* ---- callouts ---- */
+  .note{
+    border-left:3px solid var(--teal);background:var(--panel);
+    border-radius:0 10px 10px 0;padding:14px 18px;margin-top:16px;font-size:.95rem;
+  }
+  .note.warn{border-left-color:var(--amber)}
+  .note b{color:var(--ink)}
+  .note p{color:var(--ink-dim)}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line);padding:34px 0 50px;color:var(--ink-mute);font-size:.9rem}
+  footer a{color:var(--ink-dim)}
+  .foot-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+
+  @media(max-width:600px){
+    .page-hero{padding:40px 0 32px}
+    .content section{padding:34px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" role="banner">
+  <div class="nav-in">
+    <a class="brand" href="./index.html">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="36" height="36" rx="8" fill="#16223f"/>
+        <rect x="7" y="7" width="22" height="22" rx="4" stroke="#2dd4bf" stroke-width="1.8" fill="none"/>
+        <circle cx="18" cy="18" r="5" stroke="#2dd4bf" stroke-width="1.8" fill="none"/>
+        <line x1="18" y1="7" x2="18" y2="11" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="18" y1="25" x2="18" y2="29" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="7" y1="18" x2="11" y2="18" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="25" y1="18" x2="29" y2="18" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      ScanContext
+    </a>
+    <nav class="nav-links" aria-label="Site navigation">
+      <a href="./index.html">Home</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="wrap">
+    <a class="back-link" href="./index.html">Back to ScanContext</a>
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: May 2026 &nbsp;&middot;&nbsp; Effective date: May 2026<br>
+    Publisher: Nikola Reljin &nbsp;&middot;&nbsp; App identifier: <code style="background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:.08em .42em;font-size:.82em;color:var(--amber-soft);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">com.nikolareljin.scancontext</code></p>
+  </div>
+</div>
+
+<main>
+<div class="content">
+
+  <section>
+    <p class="eyebrow">Overview</p>
+    <h2>The short version</h2>
+    <p>ScanContext is a local-first desktop application. Your medical images, DICOM files,
+    reports, and annotations never leave your machine unless you explicitly configure an
+    external AI provider. There are no accounts, no telemetry, and no analytics — in the
+    app or on this website.</p>
+    <div class="note">
+      <b>One exception: AI features.</b>
+      <p>If you configure an external AI provider (such as Google Gemini), ScanContext will
+      send image and report data to that provider when you use AI-assisted features. This is
+      always opt-in — the app does not contact any AI service by default.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">What we collect</p>
+    <h2>Data collected by ScanContext</h2>
+    <p>ScanContext does not collect or transmit any personal data on its own. The only
+    network activity the application initiates is pulling Docker images from GitHub Container
+    Registry (GHCR) on first run — this is handled by Docker itself, not by application
+    code, and is limited to downloading the software needed to run.</p>
+    <ul>
+      <li><b>Docker image pulls (GHCR):</b> Docker contacts <code style="background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:.08em .42em;font-size:.82em;color:var(--amber-soft);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">ghcr.io</code> to download
+      the ScanContext container image on first run and when updates are available. This is
+      subject to GitHub's privacy policy.</li>
+    </ul>
+    <p style="margin-top:.9em">All other data — DICOM files, medical images, reports,
+    annotations, settings — is stored exclusively on your local machine.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">What we do not collect</p>
+    <h2>Data ScanContext does not collect</h2>
+    <ul>
+      <li><b>No telemetry:</b> No usage statistics, crash reports, or diagnostic data are
+      sent anywhere.</li>
+      <li><b>No analytics:</b> No Google Analytics, Mixpanel, Sentry, or any other
+      third-party analytics tool is integrated into the app.</li>
+      <li><b>No accounts:</b> ScanContext has no sign-up, no login, and no user profiles.
+      There is no server that knows you exist.</li>
+      <li><b>No medical data uploads:</b> Your DICOM files, medical images, and reports are
+      never uploaded to any server by default.</li>
+      <li><b>No behavioral tracking:</b> No information about how you use the app is
+      recorded or transmitted.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="eyebrow">AI features</p>
+    <h2>Optional AI integration</h2>
+    <p>ScanContext supports optional AI-assisted annotation and analysis. These features are
+    disabled by default and require explicit configuration by the user.</p>
+    <p>When you configure an AI provider, ScanContext may send image data and report text to
+    that provider in order to generate AI-assisted findings. You are in full control of this:
+    nothing is sent until you enable and configure a provider.</p>
+    <p>Supported provider types and their data handling:</p>
+    <ul>
+      <li><b>Local AI (Ollama and compatible tools):</b> All processing happens on your own
+      machine. No data leaves your computer.</li>
+      <li><b>External AI providers (e.g. Google Gemini, OpenAI-compatible APIs):</b> Data
+      is sent to the provider's servers. This is subject to the provider's own privacy
+      policy. Review your chosen provider's terms before using AI features with sensitive
+      medical data. Using a paid provider tier is generally required for meaningful data
+      handling commitments.</li>
+    </ul>
+    <div class="note warn">
+      <b>Medical data and external AI providers.</b>
+      <p>ScanContext may strip identifying metadata before sending data to cloud AI providers,
+      but anonymization is not a guarantee of privacy. If you are working with real patient
+      data or personally identifiable health information, use a local AI provider such as
+      Ollama, or consult your data protection obligations before enabling cloud AI features.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Third-party services</p>
+    <h2>External services and their policies</h2>
+    <p>The following external services may be involved depending on how you interact with
+    ScanContext. Each is governed by its own privacy policy.</p>
+    <ul>
+      <li>
+        <b>GitHub Container Registry (ghcr.io) &mdash; GitHub, Inc.:</b> Used to distribute
+        Docker images. Contacted by Docker on first run and for updates.
+        <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>
+      </li>
+      <li>
+        <b>Ko-fi:</b> The donation link on the ScanContext website points to a Ko-fi page.
+        If you choose to donate, Ko-fi processes that transaction.
+        <a href="https://more.ko-fi.com/privacy" target="_blank" rel="noopener">Ko-fi Privacy Policy</a>
+      </li>
+      <li>
+        <b>GitHub Issues:</b> The primary support channel for ScanContext is GitHub Issues
+        at <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener">github.com/nikolareljin/scancontext/issues</a>.
+        Use of GitHub is subject to GitHub's privacy policy.
+      </li>
+    </ul>
+    <p style="margin-top:.9em">The ScanContext landing website (this page) uses GitHub
+    Pages for hosting. It contains no cookies, no analytics scripts, and no tracking
+    of any kind.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Your rights</p>
+    <h2>Data control</h2>
+    <p>Because ScanContext stores all data locally on your machine, you have complete
+    control over it. Uninstalling the application and deleting the application data
+    directory removes all data associated with ScanContext from your system. There is no
+    server-side data to request, export, or delete.</p>
+    <p>If you used an external AI provider while ScanContext was configured to do so, any
+    data retained by that provider is subject to their own data retention and deletion
+    policies.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Contact</p>
+    <h2>Questions and concerns</h2>
+    <p>If you have questions about this privacy policy or about how ScanContext handles data,
+    please open an issue at:</p>
+    <p style="margin-top:.7em">
+      <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener">
+        github.com/nikolareljin/scancontext/issues
+      </a>
+    </p>
+    <p style="margin-top:.9em">This policy may be updated from time to time. The effective
+    date at the top of this page reflects when the current version took effect. Continued
+    use of ScanContext after a policy update constitutes acceptance of the revised policy.</p>
+    <div class="note" style="margin-top:20px">
+      <b>Not a medical device.</b>
+      <p>ScanContext is a personal productivity tool for organizing and reviewing medical
+      imaging files. It is not a diagnostic device, not a medical device, and not a
+      substitute for professional medical advice. Always consult a qualified healthcare
+      provider for medical decisions.</p>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div>Built and maintained by <b style="color:var(--ink-dim)">Nik Reljin</b>. Not a medical device &mdash; not a diagnosis.</div>
+      <div>
+        <a href="https://github.com/nikolareljin/scancontext/releases/latest" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener">Report a problem</a> &nbsp;&middot;&nbsp;
+        <a href="./privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
+        <a href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener">Donate</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

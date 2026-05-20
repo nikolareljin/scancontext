@@ -13,6 +13,7 @@
 !docs/
 docs/*
 !docs/index.html
+!docs/privacy.html
 !docs/favicon.svg
 !docs/.nojekyll
 
