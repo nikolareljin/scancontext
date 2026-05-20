@@ -236,8 +236,27 @@ tier**):
   tier.
 - You can set a **budget cap** in Google Cloud so there are no surprises.
 
-**3. Add the key to ScanContext.** Open the `.env` configuration file and set
-these four lines:
+**3. Add the key in ScanContext (no files to edit).** Open ScanContext, click
+the **Settings** link in the top bar, then:
+
+- **AI provider**: pick **Gemini**
+- Paste your API key into **Gemini API key** (it's stored locally, never
+  shown back in full — only the last 4 characters)
+- Turn **Cloud AI enabled** on
+- (Recommended) leave **Anonymize before AI** on
+- Click **Save settings**
+
+Changes apply **immediately — no restart needed**. The Settings page is also
+where you switch providers later, change the model, or remove a saved key.
+
+Then open a study and use **Analyze study**; you confirm cloud use per study.
+
+<details>
+<summary><b>Advanced — set the key in <code>.env</code> instead</b></summary>
+
+For unattended / scripted setups, the same values can be written to the
+`.env` file. After editing it you must **Stop, then Start** ScanContext so it
+reloads.
 
 ```ini
 AI_PROVIDER=gemini
@@ -255,9 +274,9 @@ Where the `.env` file lives:
 | ScanContext app — macOS       | `~/Library/Application Support/com.nikolareljin.scancontext/.env` |
 | ScanContext app — Linux       | `~/.local/share/com.nikolareljin.scancontext/.env` |
 
-**4. Restart ScanContext** so it loads the key — **Stop**, then **Start**.
+If both are set, the in-app **Settings** value wins.
 
-Then open a study and use **Analyze study**; you confirm cloud use per study.
+</details>
 
 ### Which Gemini model?
 

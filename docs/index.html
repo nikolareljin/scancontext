@@ -743,25 +743,40 @@
     <ol style="margin:10px 0 0 20px;color:var(--ink-dim)">
       <li><b>Get a key</b> at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> &mdash; sign in, click <b>Create API key</b>, copy it (starts with <code>AIza&hellip;</code>). Keep it private.</li>
       <li><b>Turn on billing</b> (paid tier) in the key's Google Cloud project &mdash; see the warning above. You can set a budget cap.</li>
-      <li><b>Add the key</b> to ScanContext's <code>.env</code> file:</li>
+      <li><b>Add the key in ScanContext &mdash; no files to edit.</b> Open ScanContext, click <b>Settings</b> in the top bar, then set:
+        <ul style="margin:6px 0 0 18px">
+          <li><b>AI provider</b>: <b>Gemini</b></li>
+          <li>Paste your key into <b>Gemini API key</b> (stored locally; the page never shows it back in full &mdash; only the last 4 characters)</li>
+          <li>Turn on <b>Cloud AI enabled</b></li>
+          <li>Leave <b>Anonymize before AI</b> on (recommended)</li>
+          <li>Click <b>Save settings</b></li>
+        </ul>
+      </li>
+      <li>Changes apply <b>immediately &mdash; no restart needed</b>. Then open a study and use <b>Analyze study</b>; you confirm cloud use per study.</li>
+      <li><b>Your API keys are safe.</b> Settings are protected automatically &mdash; only someone with access to your installation can change them. Keys are stored locally and never leave your machine.</li>
     </ol>
-    <pre><code>AI_PROVIDER=gemini
+
+    <details style="margin-top:18px;border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:var(--bg-soft)">
+      <summary style="cursor:pointer;color:var(--ink);font-weight:600">Advanced &mdash; set the key in <code>.env</code> instead</summary>
+      <div style="margin-top:10px;color:var(--ink-dim);font-size:.95rem">
+        <p>For unattended / scripted setups, the same values can be written to the <code>.env</code> file. After editing it you must <b>Stop, then Start</b> ScanContext so it reloads.</p>
+        <pre><code>AI_PROVIDER=gemini
 CLOUD_AI_ENABLED=true
 GEMINI_API_KEY=AIza...your-key...
 GEMINI_MODEL=gemini-2.5-flash</code></pre>
-    <p style="font-size:.93rem">Where the <code>.env</code> file lives:</p>
-    <table class="tbl">
-      <thead><tr><th>How you installed</th><th><code>.env</code> location</th></tr></thead>
-      <tbody>
-        <tr><td>Download bundle (.zip)</td><td>Inside the unzipped <code>ScanContext-&lt;version&gt;</code> folder</td></tr>
-        <tr><td>App &mdash; Windows</td><td><code>%APPDATA%\com.nikolareljin.scancontext\.env</code></td></tr>
-        <tr><td>App &mdash; macOS</td><td><code>~/Library/Application Support/com.nikolareljin.scancontext/.env</code></td></tr>
-        <tr><td>App &mdash; Linux</td><td><code>~/.local/share/com.nikolareljin.scancontext/.env</code></td></tr>
-      </tbody>
-    </table>
-    <ol start="4" style="margin:14px 0 0 20px;color:var(--ink-dim)">
-      <li><b>Restart ScanContext</b> (Stop, then Start) so it loads the key. Then open a study and use <b>Analyze study</b> &mdash; you confirm cloud use per study.</li>
-    </ol>
+        <p style="font-size:.93rem">Where the <code>.env</code> file lives:</p>
+        <table class="tbl">
+          <thead><tr><th>How you installed</th><th><code>.env</code> location</th></tr></thead>
+          <tbody>
+            <tr><td>Download bundle (.zip)</td><td>Inside the unzipped <code>ScanContext-&lt;version&gt;</code> folder</td></tr>
+            <tr><td>App &mdash; Windows</td><td><code>%APPDATA%\com.nikolareljin.scancontext\.env</code></td></tr>
+            <tr><td>App &mdash; macOS</td><td><code>~/Library/Application Support/com.nikolareljin.scancontext/.env</code></td></tr>
+            <tr><td>App &mdash; Linux</td><td><code>~/.local/share/com.nikolareljin.scancontext/.env</code></td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:.93rem;margin-top:8px">If both are set, the in-app <b>Settings</b> value wins.</p>
+      </div>
+    </details>
 
     <div class="grid g2" style="margin-top:24px">
       <div class="card"><h3>Which Gemini model?</h3>
