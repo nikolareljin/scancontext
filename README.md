@@ -70,7 +70,17 @@ to **Start**, **Stop**, and **Open** ScanContext any time.
 >
 > You only need to do this once.
 
-#### Option B — The download bundle (`.zip`)
+#### Option B — Install via winget (Windows, no SmartScreen warning)
+
+If you have Windows Package Manager (`winget`), open PowerShell or Windows Terminal and run:
+
+```powershell
+winget install NikolaReljin.ScanContext
+```
+
+Installs through Microsoft's trusted channel — no SmartScreen warning, no manual download.
+
+#### Option C — The download bundle (`.zip`)
 
 If you would rather not install an app, download the bundle and double-click a
 start file:
