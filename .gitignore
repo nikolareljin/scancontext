@@ -16,6 +16,10 @@ docs/*
 !docs/privacy.html
 !docs/favicon.svg
 !docs/.nojekyll
+!docs/js/
+!docs/js/*.js
+!docs/i18n/
+!docs/i18n/*.json
 
 # Showcase / demo assets shown on the site. Only screenshot (.png) and
 # walkthrough video (.webm) files are allowed — never source or credentials.

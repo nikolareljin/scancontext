@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ScanContext — understand your medical scans on your own computer</title>
-<meta name="description" content="ScanContext is a free, local-first medical image viewer, report organizer, and optional AI-assisted annotation tool for Windows, macOS, and Linux. Your data stays on your machine. Not a medical device.">
+<title data-i18n="meta.title">ScanContext — understand your medical scans on your own computer</title>
+<meta name="description" data-i18n="meta.description" data-i18n-attr="content" content="ScanContext is a free, local-first medical image viewer, report organizer, and optional AI-assisted annotation tool for Windows, macOS, and Linux. Your data stays on your machine. Not a medical device.">
 <meta name="theme-color" content="#0f172a">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="ScanContext — understand your medical scans on your own computer">
-<meta property="og:description" content="Free, local-first medical image viewer and report organizer for Windows, macOS, and Linux. Your data stays on your machine. Not a medical device.">
+<meta property="og:title" data-i18n="meta.ogTitle" data-i18n-attr="content" content="ScanContext — understand your medical scans on your own computer">
+<meta property="og:description" data-i18n="meta.ogDescription" data-i18n-attr="content" content="Free, local-first medical image viewer and report organizer for Windows, macOS, and Linux. Your data stays on your machine. Not a medical device.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://github.com/user-attachments/assets/99b8ed13-2ca9-4af6-a96a-1c2799edf3e9">
+<meta property="og:image" content="https://nikolareljin.github.io/scancontext/showcase/screenshots/02-dashboard.png">
 <meta name="twitter:card" content="summary_large_image">
 <style>
   :root{
@@ -282,13 +282,30 @@
     .step{padding:18px 18px 18px 18px}
     .step::before{position:static;margin-bottom:10px}
   }
+
+  /* ---- language switcher ---- */
+  #lang-switcher{position:relative;margin-left:8px}
+  .sc-lang-btn{display:inline-flex;align-items:center;gap:8px;background:var(--panel);
+    border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:7px 10px;
+    cursor:pointer;font:inherit;font-size:.9rem;min-height:38px}
+  .sc-lang-name{font-weight:600}
+  .sc-lang-caret{color:var(--ink-mute);font-size:.8em}
+  .sc-flag{display:block;border-radius:3px;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.25) inset}
+  .sc-lang-list{position:absolute;right:0;top:calc(100% + 6px);z-index:60;margin:0;padding:6px;
+    list-style:none;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;
+    box-shadow:0 18px 40px rgba(0,0,0,.5);max-height:60vh;overflow:auto;min-width:210px}
+  .sc-lang-list [role=option]{display:flex;align-items:center;gap:10px;padding:9px 10px;
+    border-radius:7px;cursor:pointer;color:var(--ink-dim);min-height:40px}
+  .sc-lang-list [role=option]:hover,.sc-lang-list [role=option]:focus{background:var(--panel);
+    color:var(--ink);outline:none}
+  .sc-lang-list [aria-selected=true]{color:var(--teal)}
 </style>
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-in">
-    <a class="brand" href="#top" aria-label="ScanContext home">
+    <a class="brand" href="#top" data-i18n="nav.brandAria" data-i18n-attr="aria-label" aria-label="ScanContext home">
       <svg viewBox="0 0 32 32" aria-hidden="true">
         <rect width="32" height="32" rx="7" fill="#0f172a" stroke="#27375f"/>
         <circle cx="16" cy="16" r="9" fill="none" stroke="#2dd4bf" stroke-width="2"/>
@@ -300,47 +317,49 @@
       </svg>
       ScanContext
     </a>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
+    <button class="nav-toggle" data-i18n="nav.menuAria" data-i18n-attr="aria-label" aria-label="Menu" aria-expanded="false">&#9776;</button>
     <nav class="nav-links" id="navLinks">
-      <a href="#what">What it is</a>
-      <a href="#how">How it works</a>
-      <a href="#tour">See it</a>
-      <a href="#why">Why use it</a>
-      <a href="#install">Install</a>
-      <a href="#ai">AI setup</a>
-      <a href="#faq">Help</a>
-      <a class="btn btn-primary btn-sm" href="#install" style="color:#04201c">Get ScanContext</a>
+      <a href="#what" data-i18n="nav.what">What it is</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#tour" data-i18n="nav.tour">See it</a>
+      <a href="#why" data-i18n="nav.why">Why use it</a>
+      <a href="#install" data-i18n="nav.install">Install</a>
+      <a href="#ai" data-i18n="nav.ai">AI setup</a>
+      <a href="#faq" data-i18n="nav.help">Help</a>
+      <a class="btn btn-primary btn-sm" href="#install" style="color:#04201c" data-i18n="nav.cta">Get ScanContext</a>
     </nav>
+    <div id="lang-switcher"></div>
   </div>
 </header>
 
 <a id="top"></a>
 <section class="hero">
   <div class="wrap">
-    <span class="pill"><span class="dot"></span> Free &middot; Local-first &middot; Windows, macOS &amp; Linux</span>
-    <h1>Understand your medical scans <span class="accent">on your own computer</span>.</h1>
-    <p class="lead">
+    <span class="pill" data-i18n="index.hero.pill"><span class="dot"></span> Free &middot; Local-first &middot; Windows, macOS &amp; Linux</span>
+    <h1 data-i18n="index.hero.h1">Understand your medical scans <span class="accent">on your own computer</span>.</h1>
+    <p class="lead" data-i18n="index.hero.lead">
       ScanContext is a free app that opens your medical images and reports,
       organizes them, translates and summarizes them in plain language, and
       helps you prepare clear questions for your doctor &mdash; all without
       uploading anything.
     </p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#install">&#11015; Install ScanContext</a>
-      <a class="btn btn-ghost" href="#how">See how it works</a>
+      <a class="btn btn-primary" href="#install" data-i18n="index.hero.ctaInstall">&#11015; Install ScanContext</a>
+      <a class="btn btn-ghost" href="#how" data-i18n="index.hero.ctaHow">See how it works</a>
     </div>
-    <p class="os-detect" id="osDetect">Detecting your system&hellip;</p>
+    <p class="os-detect" id="osDetect" data-i18n="index.os.detecting">Detecting your system&hellip;</p>
 
     <figure class="shot">
-      <img src="https://github.com/user-attachments/assets/99b8ed13-2ca9-4af6-a96a-1c2799edf3e9"
-           width="1900" height="841" loading="lazy"
-           alt="The ScanContext app showing a medical study with the image viewer and the report panel side by side.">
-      <figcaption>ScanContext in action &mdash; your studies, viewer, and reports together in one window.</figcaption>
+      <img src="showcase/screenshots/02-dashboard.png"
+           width="1440" height="900" loading="lazy"
+           data-i18n="index.hero.shotAlt" data-i18n-attr="alt"
+           alt="The ScanContext dashboard — import status, upload, AI provider, and recent studies.">
+      <figcaption data-i18n="index.hero.shotCaption">ScanContext in action &mdash; your studies, viewer, and reports together in one window.</figcaption>
     </figure>
 
     <div class="disclaimer">
       <span class="ic">&#9888;&#65039;</span>
-      <p><strong>Not a medical device. Not a diagnosis.</strong> ScanContext
+      <p data-i18n="index.hero.disclaimer"><strong>Not a medical device. Not a diagnosis.</strong> ScanContext
       helps you organize, view, and understand medical imaging and reports. It
       does <strong>not</strong> diagnose any condition. Every result &mdash;
       especially anything AI-suggested &mdash; must be confirmed by a qualified
@@ -352,9 +371,9 @@
 <!-- WHAT -->
 <section id="what">
   <div class="wrap">
-    <p class="eyebrow">What it is</p>
-    <h2>A calm, private place for confusing medical files</h2>
-    <p class="lead">
+    <p class="eyebrow" data-i18n="index.what.eyebrow">What it is</p>
+    <h2 data-i18n="index.what.h2">A calm, private place for confusing medical files</h2>
+    <p class="lead" data-i18n="index.what.lead">
       A CD of scan images, a folder of DICOM files, a PDF report in a language
       you don't read &mdash; medical records arrive in formats made for
       hospitals, not for you. ScanContext opens all of them in one window,
@@ -363,20 +382,20 @@
     <div class="grid g3">
       <div class="card">
         <div class="ic">&#128274;</div>
-        <h3>100% local-first</h3>
-        <p>Runs on your own computer. Your scans and reports never leave it
+        <h3 data-i18n="index.what.card1.title">100% local-first</h3>
+        <p data-i18n="index.what.card1.body">Runs on your own computer. Your scans and reports never leave it
         unless you deliberately turn on a cloud AI provider.</p>
       </div>
       <div class="card">
         <div class="ic">&#129657;</div>
-        <h3>For patients &amp; families</h3>
-        <p>No medical or technical background needed. Plain-language summaries,
+        <h3 data-i18n="index.what.card2.title">For patients &amp; families</h3>
+        <p data-i18n="index.what.card2.body">No medical or technical background needed. Plain-language summaries,
         guided tour, and a help button on every screen.</p>
       </div>
       <div class="card">
         <div class="ic">&#129534;</div>
-        <h3>AI is optional</h3>
-        <p>ScanContext works fully without AI. When you choose to enable it,
+        <h3 data-i18n="index.what.card3.title">AI is optional</h3>
+        <p data-i18n="index.what.card3.body">ScanContext works fully without AI. When you choose to enable it,
         results are always labelled "candidate findings, not a diagnosis".</p>
       </div>
     </div>
@@ -386,39 +405,39 @@
 <!-- HOW -->
 <section id="how">
   <div class="wrap">
-    <p class="eyebrow">How it works</p>
-    <h2>From a pile of files to a clear conversation</h2>
-    <p class="lead">Five simple steps. You stay in control at every one.</p>
+    <p class="eyebrow" data-i18n="index.how.eyebrow">How it works</p>
+    <h2 data-i18n="index.how.h2">From a pile of files to a clear conversation</h2>
+    <p class="lead" data-i18n="index.how.lead">Five simple steps. You stay in control at every one.</p>
     <div class="steps">
       <div class="step">
-        <h3>Import your files</h3>
-        <p>Drag a file or a whole folder straight onto the app — DICOM studies,
+        <h3 data-i18n="index.how.step1.title">Import your files</h3>
+        <p data-i18n="index.how.step1.body">Drag a file or a whole folder straight onto the app — DICOM studies,
         image files, ZIPs, PDFs, or text reports. ScanContext sorts them into
         studies for you, and you can delete any study when you're done.</p>
       </div>
       <div class="step">
-        <h3>View &amp; annotate</h3>
-        <p>Open images and DICOM scans in a built-in viewer. Draw, mark, and
+        <h3 data-i18n="index.how.step2.title">View &amp; annotate</h3>
+        <p data-i18n="index.how.step2.body">Open images and DICOM scans in a built-in viewer. Draw, mark, and
         save annotations to remember what you want to ask about.</p>
       </div>
       <div class="step">
-        <h3>Extract &amp; translate</h3>
-        <p>Pull the text out of reports and, when needed, translate
+        <h3 data-i18n="index.how.step3.title">Extract &amp; translate</h3>
+        <p data-i18n="index.how.step3.body">Pull the text out of reports and, when needed, translate
         non-English reports into English &mdash; right on your machine.</p>
       </div>
       <div class="step">
-        <h3>AI assist <em style="color:var(--ink-mute);font-style:normal;font-size:.85em">(optional)</em></h3>
-        <p>If you turn it on, AI summarizes reports and points to regions of an
+        <h3 data-i18n="index.how.step4.title">AI assist <em style="color:var(--ink-mute);font-style:normal;font-size:.85em">(optional)</em></h3>
+        <p data-i18n="index.how.step4.body">If you turn it on, AI summarizes reports and points to regions of an
         image worth a closer look &mdash; always clearly marked as candidates,
         never a diagnosis.</p>
       </div>
       <div class="step">
-        <h3>Export for your doctor</h3>
-        <p>Generate a tidy, doctor-friendly summary of the study and your
+        <h3 data-i18n="index.how.step5.title">Export for your doctor</h3>
+        <p data-i18n="index.how.step5.body">Generate a tidy, doctor-friendly summary of the study and your
         questions to bring to your appointment.</p>
       </div>
     </div>
-    <div class="note">
+    <div class="note" data-i18n="index.how.note">
       <b>Under the hood:</b> ScanContext runs as a small set of services inside
       Docker on your computer &mdash; a viewer, a report engine, and a local
       DICOM store. You never touch any of that; the app starts and stops it for
@@ -430,9 +449,9 @@
 <!-- TOUR -->
 <section id="tour">
   <div class="wrap">
-    <p class="eyebrow">See it in action</p>
-    <h2>A look inside ScanContext</h2>
-    <p class="lead">
+    <p class="eyebrow" data-i18n="index.tour.eyebrow">See it in action</p>
+    <h2 data-i18n="index.tour.h2">A look inside ScanContext</h2>
+    <p class="lead" data-i18n="index.tour.lead">
       Everything below is the real app, captured from its built-in demo study
       &mdash; a fully fictional CT chest scan with invented patient details. No
       real medical data is shown.
@@ -443,47 +462,54 @@
              poster="showcase/screenshots/02-dashboard.png"
              width="1440" height="900">
         <source src="showcase/video/walkthrough.webm" type="video/webm">
-        Your browser can't play this video &mdash;
-        <a href="showcase/video/walkthrough.webm">download the walkthrough</a>.
+        <span data-i18n="index.tour.videoFallback">Your browser can't play this video &mdash;
+        <a href="showcase/video/walkthrough.webm">download the walkthrough</a>.</span>
       </video>
     </figure>
 
     <div class="gallery">
       <figure>
         <img src="showcase/screenshots/02-dashboard.png" loading="lazy"
+             data-i18n="index.tour.gallery1.alt" data-i18n-attr="alt"
              alt="ScanContext dashboard: drag-and-drop upload area, studies, and AI provider status.">
-        <figcaption>Drag a file or a whole folder to import; your studies, import
+        <figcaption data-i18n="index.tour.gallery1.caption">Drag a file or a whole folder to import; your studies, import
         status, and AI provider at a glance. Delete a study anytime.</figcaption>
       </figure>
       <figure>
         <img src="showcase/screenshots/16-dark-theme.png" loading="lazy"
+             data-i18n="index.tour.gallery2.alt" data-i18n-attr="alt"
              alt="The ScanContext dashboard in dark theme.">
-        <figcaption>Light, Dark, or System theme &mdash; switch from the header or Settings.</figcaption>
+        <figcaption data-i18n="index.tour.gallery2.caption">Light, Dark, or System theme &mdash; switch from the header or Settings.</figcaption>
       </figure>
       <figure>
         <img src="showcase/screenshots/04-viewer-slice.png" loading="lazy"
+             data-i18n="index.tour.gallery3.alt" data-i18n-attr="alt"
              alt="The ScanContext image viewer showing a CT slice.">
-        <figcaption>Scroll slices, zoom, and adjust window/level in the viewer.</figcaption>
+        <figcaption data-i18n="index.tour.gallery3.caption">Scroll slices, zoom, and adjust window/level in the viewer.</figcaption>
       </figure>
       <figure>
         <img src="showcase/screenshots/09-viewer-annotations.png" loading="lazy"
+             data-i18n="index.tour.gallery4.alt" data-i18n-attr="alt"
              alt="A CT slice with an annotation box overlaid.">
-        <figcaption>Confirmed marks in solid blue; AI suggestions in dotted amber.</figcaption>
+        <figcaption data-i18n="index.tour.gallery4.caption">Confirmed marks in solid blue; AI suggestions in dotted amber.</figcaption>
       </figure>
       <figure>
         <img src="showcase/screenshots/07-reports.png" loading="lazy"
+             data-i18n="index.tour.gallery5.alt" data-i18n-attr="alt"
              alt="The report panel showing an imported radiology report.">
-        <figcaption>Reports shown as imported, with optional translation and summary.</figcaption>
+        <figcaption data-i18n="index.tour.gallery5.caption">Reports shown as imported, with optional translation and summary.</figcaption>
       </figure>
       <figure>
         <img src="showcase/screenshots/10-ai-review.png" loading="lazy"
+             data-i18n="index.tour.gallery6.alt" data-i18n-attr="alt"
              alt="The AI review tab with the Analyze study action.">
-        <figcaption>Optional AI review &mdash; candidate findings, never a diagnosis.</figcaption>
+        <figcaption data-i18n="index.tour.gallery6.caption">Optional AI review &mdash; candidate findings, never a diagnosis.</figcaption>
       </figure>
       <figure>
         <img src="showcase/screenshots/12-export-anonymize.png" loading="lazy"
+             data-i18n="index.tour.gallery7.alt" data-i18n-attr="alt"
              alt="The export tab with the Anonymize option enabled.">
-        <figcaption>Export a doctor-friendly ZIP &mdash; anonymized if you choose.</figcaption>
+        <figcaption data-i18n="index.tour.gallery7.caption">Export a doctor-friendly ZIP &mdash; anonymized if you choose.</figcaption>
       </figure>
     </div>
   </div>
@@ -492,35 +518,35 @@
 <!-- WHY -->
 <section id="why">
   <div class="wrap">
-    <p class="eyebrow">Why use it</p>
-    <h2>The benefits, in plain terms</h2>
+    <p class="eyebrow" data-i18n="index.why.eyebrow">Why use it</p>
+    <h2 data-i18n="index.why.h2">The benefits, in plain terms</h2>
     <div class="grid g3">
-      <div class="card"><div class="ic">&#127968;</div><h3>Your data stays home</h3>
-        <p>Nothing is uploaded by default. Files live in a folder on your
+      <div class="card"><div class="ic">&#127968;</div><h3 data-i18n="index.why.card1.title">Your data stays home</h3>
+        <p data-i18n="index.why.card1.body">Nothing is uploaded by default. Files live in a folder on your
         computer that you can see and back up.</p></div>
-      <div class="card"><div class="ic">&#128172;</div><h3>Plain language</h3>
-        <p>Turns dense radiology wording into something you can actually read,
+      <div class="card"><div class="ic">&#128172;</div><h3 data-i18n="index.why.card2.title">Plain language</h3>
+        <p data-i18n="index.why.card2.body">Turns dense radiology wording into something you can actually read,
         and translates foreign-language reports.</p></div>
-      <div class="card"><div class="ic">&#129520;</div><h3>One viewer for everything</h3>
-        <p>DICOM, JPEGs, PDFs, ZIP archives, text reports &mdash; all opened in
+      <div class="card"><div class="ic">&#129520;</div><h3 data-i18n="index.why.card3.title">One viewer for everything</h3>
+        <p data-i18n="index.why.card3.body">DICOM, JPEGs, PDFs, ZIP archives, text reports &mdash; all opened in
         one place, no extra software.</p></div>
-      <div class="card"><div class="ic">&#128176;</div><h3>Free to use</h3>
-        <p>Built by one independent developer. Free, with an optional small
+      <div class="card"><div class="ic">&#128176;</div><h3 data-i18n="index.why.card4.title">Free to use</h3>
+        <p data-i18n="index.why.card4.body">Built by one independent developer. Free, with an optional small
         donation if it helps you.</p></div>
-      <div class="card"><div class="ic">&#128187;</div><h3>Works everywhere</h3>
-        <p>Windows, macOS, and Linux &mdash; the same app, the same simple
+      <div class="card"><div class="ic">&#128187;</div><h3 data-i18n="index.why.card5.title">Works everywhere</h3>
+        <p data-i18n="index.why.card5.body">Windows, macOS, and Linux &mdash; the same app, the same simple
         steps on every system.</p></div>
-      <div class="card"><div class="ic">&#129701;</div><h3>You decide on AI</h3>
-        <p>AI is off until you switch it on, and you confirm cloud use for each
+      <div class="card"><div class="ic">&#129701;</div><h3 data-i18n="index.why.card6.title">You decide on AI</h3>
+        <p data-i18n="index.why.card6.body">AI is off until you switch it on, and you confirm cloud use for each
         individual study.</p></div>
-      <div class="card"><div class="ic">&#128203;</div><h3>Ready for the doctor</h3>
-        <p>Walk into your appointment with an organized summary and a clear
+      <div class="card"><div class="ic">&#128203;</div><h3 data-i18n="index.why.card7.title">Ready for the doctor</h3>
+        <p data-i18n="index.why.card7.body">Walk into your appointment with an organized summary and a clear
         list of questions.</p></div>
-      <div class="card"><div class="ic">&#128241;</div><h3>One-click app</h3>
-        <p>A desktop app with a tray / menu-bar icon starts and stops
+      <div class="card"><div class="ic">&#128241;</div><h3 data-i18n="index.why.card8.title">One-click app</h3>
+        <p data-i18n="index.why.card8.body">A desktop app with a tray / menu-bar icon starts and stops
         ScanContext for you &mdash; no scripts to run.</p></div>
-      <div class="card"><div class="ic">&#9889;</div><h3>Fast after first run</h3>
-        <p>The first start downloads the app once. Every start after that is
+      <div class="card"><div class="ic">&#9889;</div><h3 data-i18n="index.why.card9.title">Fast after first run</h3>
+        <p data-i18n="index.why.card9.body">The first start downloads the app once. Every start after that is
         quick.</p></div>
     </div>
   </div>
@@ -529,9 +555,9 @@
 <!-- INSTALL -->
 <section id="install">
   <div class="wrap">
-    <p class="eyebrow">Install &mdash; a friendly step-by-step guide</p>
-    <h2>Get ScanContext running in three steps</h2>
-    <p class="lead">
+    <p class="eyebrow" data-i18n="index.install.eyebrow">Install &mdash; a friendly step-by-step guide</p>
+    <h2 data-i18n="index.install.h2">Get ScanContext running in three steps</h2>
+    <p class="lead" data-i18n="index.install.lead">
       No GitHub account and no source code needed, and we'll walk you through
       every step. On Windows and macOS you don't touch a terminal at all.
       Please follow the steps in order &mdash; just pick your system in
@@ -540,143 +566,143 @@
 
     <!-- step 1 -->
     <div class="install-step">
-      <span class="badge">Step 1 &mdash; one time</span>
-      <h3>Install Docker Desktop (free)</h3>
-      <p>ScanContext runs inside Docker, so install Docker Desktop first. It is
+      <span class="badge" data-i18n="index.install.step1.badge">Step 1 &mdash; one time</span>
+      <h3 data-i18n="index.install.step1.title">Install Docker Desktop (free)</h3>
+      <p data-i18n="index.install.step1.body">ScanContext runs inside Docker, so install Docker Desktop first. It is
       free and you only ever do this once.</p>
       <p style="margin-top:10px">
-        <a class="btn btn-ghost btn-sm" href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener">&#128011; Get Docker Desktop &#8599;</a>
+        <a class="btn btn-ghost btn-sm" href="https://www.docker.com/products/docker-desktop/" target="_blank" rel="noopener" data-i18n="index.install.step1.link">&#128011; Get Docker Desktop &#8599;</a>
       </p>
-      <div class="note"><b>Then open Docker Desktop once</b> and wait until it
+      <div class="note" data-i18n="index.install.step1.note"><b>Then open Docker Desktop once</b> and wait until it
       says <b>"running"</b>. Leave it running while you use ScanContext. That's
       the whole of Step 1.</div>
     </div>
 
     <!-- step 2 -->
     <div class="install-step">
-      <span class="badge">Step 2 &mdash; pick your system</span>
-      <h3>Download &amp; start ScanContext <span class="ver" id="verBadge">latest release</span></h3>
-      <p>There are two ways to run it &mdash; the <b>app</b> (easiest) or a
+      <span class="badge" data-i18n="index.install.step2.badge">Step 2 &mdash; pick your system</span>
+      <h3><span data-i18n="index.install.step2.title">Download &amp; start ScanContext</span> <span class="ver" id="verBadge" data-i18n="index.ver.latest">latest release</span></h3>
+      <p data-i18n="index.install.step2.body">There are two ways to run it &mdash; the <b>app</b> (easiest) or a
       <b>download bundle</b>. Choose whichever you prefer; both work the same
       once open. The buttons below download the file directly &mdash; there's
       no other page to visit.</p>
 
-      <div class="os-tabs" role="tablist" aria-label="Operating system">
-        <button class="os-tab" role="tab" data-os="windows" aria-selected="false">&#129001; Windows</button>
-        <button class="os-tab" role="tab" data-os="mac" aria-selected="false">&#127822; macOS</button>
-        <button class="os-tab" role="tab" data-os="linux" aria-selected="false">&#128039; Linux</button>
+      <div class="os-tabs" role="tablist" data-i18n="index.install.tabsAria" data-i18n-attr="aria-label" aria-label="Operating system">
+        <button class="os-tab" role="tab" data-os="windows" aria-selected="false" data-i18n="index.install.tabWindows">&#129001; Windows</button>
+        <button class="os-tab" role="tab" data-os="mac" aria-selected="false" data-i18n="index.install.tabMac">&#127822; macOS</button>
+        <button class="os-tab" role="tab" data-os="linux" aria-selected="false" data-i18n="index.install.tabLinux">&#128039; Linux</button>
       </div>
 
       <!-- WINDOWS -->
       <div class="os-panel" data-os="windows">
         <div class="opt">
-          <span class="tag">Option A &mdash; recommended</span>
-          <h4>The ScanContext app</h4>
-          <p>A small desktop app that starts and stops ScanContext for you.</p>
+          <span class="tag" data-i18n="index.install.win.optA.tag">Option A &mdash; recommended</span>
+          <h4 data-i18n="index.install.win.optA.title">The ScanContext app</h4>
+          <p data-i18n="index.install.win.optA.body">A small desktop app that starts and stops ScanContext for you.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" data-asset="win-exe" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download for Windows &mdash; installer (.exe)</a>
-            <a class="btn btn-ghost btn-sm" data-asset="win-msi" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; .msi alternative</a>
+            <a class="btn btn-primary btn-sm" data-asset="win-exe" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.win.optA.dlExe">&#11015; Download for Windows &mdash; installer (.exe)</a>
+            <a class="btn btn-ghost btn-sm" data-asset="win-msi" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.win.optA.dlMsi">&#11015; .msi alternative</a>
           </div>
           <ol>
-            <li><b>Double-click</b> the downloaded installer and follow it through.</li>
-            <li>If a blue <b>SmartScreen</b> warning appears, click <b>More info</b> &rarr; <b>Run anyway</b> (only the first time &mdash; the app isn't code-signed yet).</li>
-            <li>Open <b>ScanContext</b> from the Start menu. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
+            <li data-i18n="index.install.win.optA.step1"><b>Double-click</b> the downloaded installer and follow it through.</li>
+            <li data-i18n="index.install.win.optA.step2">If a blue <b>SmartScreen</b> warning appears, click <b>More info</b> &rarr; <b>Run anyway</b> (only the first time &mdash; the app isn't code-signed yet).</li>
+            <li data-i18n="index.install.win.optA.step3">Open <b>ScanContext</b> from the Start menu. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
           </ol>
         </div>
         <div class="opt">
-          <span class="tag">Option B &mdash; winget</span>
-          <h4>Install via winget</h4>
-          <p>For developers and power users who prefer the command line. No SmartScreen warning &mdash; installs through Microsoft&rsquo;s trusted channel.</p>
+          <span class="tag" data-i18n="index.install.win.optB.tag">Option B &mdash; winget</span>
+          <h4 data-i18n="index.install.win.optB.title">Install via winget</h4>
+          <p data-i18n="index.install.win.optB.body">For developers and power users who prefer the command line. No SmartScreen warning &mdash; installs through Microsoft&rsquo;s trusted channel.</p>
           <pre style="background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:.75rem 1rem;font-size:.85rem;overflow-x:auto;margin:.5rem 0">winget install NikolaReljin.ScanContext</pre>
           <ol>
-            <li>Open <b>PowerShell</b> or <b>Windows Terminal</b> and run the command above.</li>
-            <li>Open <b>ScanContext</b> from the Start menu when the install finishes.</li>
+            <li data-i18n="index.install.win.optB.step1">Open <b>PowerShell</b> or <b>Windows Terminal</b> and run the command above.</li>
+            <li data-i18n="index.install.win.optB.step2">Open <b>ScanContext</b> from the Start menu when the install finishes.</li>
           </ol>
         </div>
         <div class="opt">
-          <span class="tag">Option C &mdash; no install</span>
-          <h4>The download bundle (.zip)</h4>
-          <p>No installer &mdash; just unzip and double-click a start file.</p>
+          <span class="tag" data-i18n="index.install.win.optC.tag">Option C &mdash; no install</span>
+          <h4 data-i18n="index.install.win.optC.title">The download bundle (.zip)</h4>
+          <p data-i18n="index.install.win.optC.body">No installer &mdash; just unzip and double-click a start file.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download the bundle (.zip)</a>
+            <a class="btn btn-primary btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.win.optC.dl">&#11015; Download the bundle (.zip)</a>
           </div>
           <ol>
-            <li>Unzip it anywhere (Desktop, Documents&hellip;).</li>
-            <li>Open the unzipped folder and <b>double-click <code>Start ScanContext.bat</code></b>.</li>
-            <li>First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
+            <li data-i18n="index.install.win.optC.step1">Unzip it anywhere (Desktop, Documents&hellip;).</li>
+            <li data-i18n="index.install.win.optC.step2">Open the unzipped folder and <b>double-click <code>Start ScanContext.bat</code></b>.</li>
+            <li data-i18n="index.install.win.optC.step3">First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
           </ol>
         </div>
-        <div class="note"><b>To stop it:</b> click <b>Stop</b> in the app, or
+        <div class="note" data-i18n="index.install.win.stopNote"><b>To stop it:</b> click <b>Stop</b> in the app, or
         double-click <code>Stop ScanContext.bat</code> in the bundle folder.</div>
       </div>
 
       <!-- MAC -->
       <div class="os-panel" data-os="mac">
         <div class="opt">
-          <span class="tag">Option A &mdash; recommended (Apple Silicon)</span>
-          <h4>The ScanContext app</h4>
-          <p>For Apple Silicon Macs (M1/M2/M3 and newer). On an Intel Mac, please use Option B below.</p>
+          <span class="tag" data-i18n="index.install.mac.optA.tag">Option A &mdash; recommended (Apple Silicon)</span>
+          <h4 data-i18n="index.install.mac.optA.title">The ScanContext app</h4>
+          <p data-i18n="index.install.mac.optA.body">For Apple Silicon Macs (M1/M2/M3 and newer). On an Intel Mac, please use Option B below.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" data-asset="mac-dmg" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download for macOS &mdash; Apple Silicon (.dmg)</a>
+            <a class="btn btn-primary btn-sm" data-asset="mac-dmg" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.mac.optA.dl">&#11015; Download for macOS &mdash; Apple Silicon (.dmg)</a>
           </div>
           <ol>
-            <li>Open the <code>.dmg</code> and <b>drag ScanContext into Applications</b>.</li>
-            <li>First launch: <b>right-click the app &rarr; Open &rarr; Open</b> (the app isn't code-signed yet &mdash; only needed once).</li>
-            <li>It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
+            <li data-i18n="index.install.mac.optA.step1">Open the <code>.dmg</code> and <b>drag ScanContext into Applications</b>.</li>
+            <li data-i18n="index.install.mac.optA.step2">First launch: <b>right-click the app &rarr; Open &rarr; Open</b> (the app isn't code-signed yet &mdash; only needed once).</li>
+            <li data-i18n="index.install.mac.optA.step3">It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
           </ol>
         </div>
         <div class="opt">
-          <span class="tag">Option B &mdash; no install (any Mac)</span>
-          <h4>The download bundle (.zip)</h4>
-          <p>Works on both Apple Silicon and Intel Macs.</p>
+          <span class="tag" data-i18n="index.install.mac.optB.tag">Option B &mdash; no install (any Mac)</span>
+          <h4 data-i18n="index.install.mac.optB.title">The download bundle (.zip)</h4>
+          <p data-i18n="index.install.mac.optB.body">Works on both Apple Silicon and Intel Macs.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download the bundle (.zip)</a>
+            <a class="btn btn-primary btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.mac.optB.dl">&#11015; Download the bundle (.zip)</a>
           </div>
           <ol>
-            <li>Unzip it anywhere.</li>
-            <li>Open the folder and <b>double-click <code>Start ScanContext.command</code></b>.</li>
-            <li>First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
+            <li data-i18n="index.install.mac.optB.step1">Unzip it anywhere.</li>
+            <li data-i18n="index.install.mac.optB.step2">Open the folder and <b>double-click <code>Start ScanContext.command</code></b>.</li>
+            <li data-i18n="index.install.mac.optB.step3">First start downloads the app (a few minutes); then your browser opens ScanContext.</li>
           </ol>
         </div>
-        <div class="note"><b>To stop it:</b> click <b>Stop</b> in the app, or
+        <div class="note" data-i18n="index.install.mac.stopNote"><b>To stop it:</b> click <b>Stop</b> in the app, or
         run <code>sh ./stop.sh</code> in the bundle folder.</div>
       </div>
 
       <!-- LINUX -->
       <div class="os-panel" data-os="linux">
         <div class="opt">
-          <span class="tag">Option A &mdash; recommended</span>
-          <h4>The ScanContext app</h4>
-          <p>Pick the package for your distribution &mdash; or the portable AppImage.</p>
+          <span class="tag" data-i18n="index.install.linux.optA.tag">Option A &mdash; recommended</span>
+          <h4 data-i18n="index.install.linux.optA.title">The ScanContext app</h4>
+          <p data-i18n="index.install.linux.optA.body">Pick the package for your distribution &mdash; or the portable AppImage.</p>
           <div class="dl-row">
-            <a class="btn btn-primary btn-sm" data-asset="linux-appimage" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; AppImage (portable)</a>
-            <a class="btn btn-ghost btn-sm" data-asset="linux-deb" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; .deb (Debian / Ubuntu)</a>
-            <a class="btn btn-ghost btn-sm" data-asset="linux-rpm" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; .rpm (Fedora / RHEL)</a>
+            <a class="btn btn-primary btn-sm" data-asset="linux-appimage" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.linux.optA.dlAppimage">&#11015; AppImage (portable)</a>
+            <a class="btn btn-ghost btn-sm" data-asset="linux-deb" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.linux.optA.dlDeb">&#11015; .deb (Debian / Ubuntu)</a>
+            <a class="btn btn-ghost btn-sm" data-asset="linux-rpm" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.linux.optA.dlRpm">&#11015; .rpm (Fedora / RHEL)</a>
           </div>
           <ol>
-            <li><b>AppImage:</b> make it executable (<code>chmod +x</code>) then double-click it. <b>.deb / .rpm:</b> install it like any package.</li>
-            <li>Open <b>ScanContext</b>. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
+            <li data-i18n="index.install.linux.optA.step1"><b>AppImage:</b> make it executable (<code>chmod +x</code>) then double-click it. <b>.deb / .rpm:</b> install it like any package.</li>
+            <li data-i18n="index.install.linux.optA.step2">Open <b>ScanContext</b>. It checks Docker, downloads the app on first run, then click <b>Open ScanContext</b>.</li>
           </ol>
         </div>
         <div class="opt">
-          <span class="tag">Option B &mdash; terminal (always gets the latest)</span>
-          <h4>One-line install with <code>curl</code></h4>
-          <p>Prefer the terminal? This always fetches the most recent release &mdash; no version numbers to track. Paste it into a terminal:</p>
+          <span class="tag" data-i18n="index.install.linux.optB.tag">Option B &mdash; terminal (always gets the latest)</span>
+          <h4 data-i18n="index.install.linux.optB.title">One-line install with <code>curl</code></h4>
+          <p data-i18n="index.install.linux.optB.body">Prefer the terminal? This always fetches the most recent release &mdash; no version numbers to track. Paste it into a terminal:</p>
           <pre><code>curl -fsSL "$(curl -fsSL https://api.github.com/repos/nikolareljin/scancontext/releases/latest \
   | grep -oE '"browser_download_url":[^,]*\.zip"' | cut -d'"' -f4)" -o ScanContext.zip \
   &amp;&amp; unzip -q ScanContext.zip &amp;&amp; cd ScanContext-* &amp;&amp; sh ./start.sh</code></pre>
-          <p style="font-size:.92rem">To download the AppImage instead, swap <code>\.zip"</code> for <code>\.AppImage"</code> in the command above.</p>
-          <p style="font-size:.92rem">Or download the bundle by hand:</p>
+          <p style="font-size:.92rem" data-i18n="index.install.linux.optB.swapNote">To download the AppImage instead, swap <code>\.zip"</code> for <code>\.AppImage"</code> in the command above.</p>
+          <p style="font-size:.92rem" data-i18n="index.install.linux.optB.orText">Or download the bundle by hand:</p>
           <div class="dl-row">
-            <a class="btn btn-ghost btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest">&#11015; Download the bundle (.zip)</a>
+            <a class="btn btn-ghost btn-sm" data-asset="bundle-zip" href="https://github.com/nikolareljin/scancontext/releases/latest" data-i18n="index.install.linux.optB.dl">&#11015; Download the bundle (.zip)</a>
           </div>
-          <p style="font-size:.92rem">First start downloads the app (a few minutes); then your browser opens ScanContext.</p>
+          <p style="font-size:.92rem" data-i18n="index.install.linux.optB.afterText">First start downloads the app (a few minutes); then your browser opens ScanContext.</p>
         </div>
-        <div class="note"><b>To stop it:</b> click <b>Stop</b> in the app, or
+        <div class="note" data-i18n="index.install.linux.stopNote"><b>To stop it:</b> click <b>Stop</b> in the app, or
         run <code>sh ./stop.sh</code> in the bundle folder.</div>
       </div>
 
-      <div class="note"><b>Looking for a previous version, or a different
+      <div class="note" data-i18n="index.install.olderNote"><b>Looking for a previous version, or a different
       file?</b> Every release &mdash; current and older &mdash; with all of its
       downloads is listed here:
       <a href="https://github.com/nikolareljin/scancontext/releases" target="_blank" rel="noopener">all ScanContext releases &#8599;</a></div>
@@ -684,41 +710,41 @@
 
     <!-- step 3 -->
     <div class="install-step">
-      <span class="badge">Step 3 &mdash; you're in</span>
-      <h3>Use ScanContext</h3>
-      <p>When it's ready, ScanContext opens in your web browser. A short
+      <span class="badge" data-i18n="index.install.step3.badge">Step 3 &mdash; you're in</span>
+      <h3 data-i18n="index.install.step3.title">Use ScanContext</h3>
+      <p data-i18n="index.install.step3.body">When it's ready, ScanContext opens in your web browser. A short
       <b>guided tour</b> runs the first time &mdash; reopen help any time with
       the <b>"?"</b> button in the top-right corner. Import a study and explore.
       Your studies and data are always kept between runs.</p>
     </div>
 
     <div class="cta-row" style="margin-top:26px">
-      <a class="btn btn-ghost" href="https://github.com/nikolareljin/scancontext/releases" target="_blank" rel="noopener">&#128230; Browse all releases (incl. previous) &#8599;</a>
-      <a class="btn btn-ghost" href="#faq">Need a hand? See Help</a>
+      <a class="btn btn-ghost" href="https://github.com/nikolareljin/scancontext/releases" target="_blank" rel="noopener" data-i18n="index.install.browseReleases">&#128230; Browse all releases (incl. previous) &#8599;</a>
+      <a class="btn btn-ghost" href="#faq" data-i18n="index.install.needHelp">Need a hand? See Help</a>
     </div>
-    <p class="os-detect" style="margin-top:14px">The download buttons above always point to the newest release. Older versions are on the all-releases page.</p>
+    <p class="os-detect" style="margin-top:14px" data-i18n="index.install.dlNote">The download buttons above always point to the newest release. Older versions are on the all-releases page.</p>
   </div>
 </section>
 
 <!-- REQUIREMENTS -->
 <section id="req">
   <div class="wrap">
-    <p class="eyebrow">Before you start</p>
-    <h2>System requirements</h2>
+    <p class="eyebrow" data-i18n="index.req.eyebrow">Before you start</p>
+    <h2 data-i18n="index.req.h2">System requirements</h2>
     <div class="grid g2">
-      <div class="card"><h3>You need</h3>
+      <div class="card"><h3 data-i18n="index.req.need.title">You need</h3>
         <ul style="margin:6px 0 0 18px;color:var(--ink-dim)">
-          <li>Windows 10/11, macOS 12 or newer, or a modern Linux desktop</li>
-          <li>Docker Desktop installed and running</li>
-          <li>About 4 GB free disk space, plus room for your studies</li>
-          <li>A modern browser &mdash; Chrome, Edge, Firefox, or Safari</li>
+          <li data-i18n="index.req.need.item1">Windows 10/11, macOS 12 or newer, or a modern Linux desktop</li>
+          <li data-i18n="index.req.need.item2">Docker Desktop installed and running</li>
+          <li data-i18n="index.req.need.item3">About 4 GB free disk space, plus room for your studies</li>
+          <li data-i18n="index.req.need.item4">A modern browser &mdash; Chrome, Edge, Firefox, or Safari</li>
         </ul>
       </div>
-      <div class="card"><h3>Good to know</h3>
+      <div class="card"><h3 data-i18n="index.req.good.title">Good to know</h3>
         <ul style="margin:6px 0 0 18px;color:var(--ink-dim)">
-          <li>Internet is needed only for the one-time first download (and for cloud AI, if you enable it)</li>
-          <li>The app uses ports <code>5173</code> and <code>8000</code> on your machine</li>
-          <li>No account, no sign-up, no telemetry</li>
+          <li data-i18n="index.req.good.item1">Internet is needed only for the one-time first download (and for cloud AI, if you enable it)</li>
+          <li data-i18n="index.req.good.item2">The app uses ports <code>5173</code> and <code>8000</code> on your machine</li>
+          <li data-i18n="index.req.good.item3">No account, no sign-up, no telemetry</li>
         </ul>
       </div>
     </div>
@@ -728,9 +754,9 @@
 <!-- AI -->
 <section id="ai">
   <div class="wrap">
-    <p class="eyebrow">Optional</p>
-    <h2>Connect an AI provider</h2>
-    <p class="lead">
+    <p class="eyebrow" data-i18n="index.ai.eyebrow">Optional</p>
+    <h2 data-i18n="index.ai.h2">Connect an AI provider</h2>
+    <p class="lead" data-i18n="index.ai.lead">
       ScanContext works fully without AI. When you turn it on, it can summarize
       reports, translate non-English reports, and suggest regions of an image
       worth a closer look &mdash; always labelled "candidate findings, not a
@@ -738,16 +764,16 @@
     </p>
 
     <table class="tbl">
-      <thead><tr><th>Provider</th><th>What it is</th><th>Privacy notes</th></tr></thead>
+      <thead><tr><th data-i18n="index.ai.table.thProvider">Provider</th><th data-i18n="index.ai.table.thWhat">What it is</th><th data-i18n="index.ai.table.thPrivacy">Privacy notes</th></tr></thead>
       <tbody>
-        <tr><td><b>Google Gemini</b></td><td>Recommended. Free tier to try; paid tier for real use.</td><td>Cloud. Anonymized data sent; paid tier required for genuine privacy.</td></tr>
-        <tr><td>Anthropic Claude</td><td>Paid cloud API.</td><td>Cloud. Anonymized data sent to Anthropic.</td></tr>
-        <tr><td>OpenAI</td><td>Paid cloud API.</td><td>Cloud. Anonymized data sent to OpenAI.</td></tr>
-        <tr><td><b>Ollama</b></td><td>Fully local AI &mdash; no key, no internet.</td><td>Nothing leaves your computer. Best for privacy.</td></tr>
+        <tr><td data-i18n="index.ai.table.r1.name"><b>Google Gemini</b></td><td data-i18n="index.ai.table.r1.what">Recommended. Free tier to try; paid tier for real use.</td><td data-i18n="index.ai.table.r1.privacy">Cloud. Anonymized data sent; paid tier required for genuine privacy.</td></tr>
+        <tr><td data-i18n="index.ai.table.r2.name">Anthropic Claude</td><td data-i18n="index.ai.table.r2.what">Paid cloud API.</td><td data-i18n="index.ai.table.r2.privacy">Cloud. Anonymized data sent to Anthropic.</td></tr>
+        <tr><td data-i18n="index.ai.table.r3.name">OpenAI</td><td data-i18n="index.ai.table.r3.what">Paid cloud API.</td><td data-i18n="index.ai.table.r3.privacy">Cloud. Anonymized data sent to OpenAI.</td></tr>
+        <tr><td data-i18n="index.ai.table.r4.name"><b>Ollama</b></td><td data-i18n="index.ai.table.r4.what">Fully local AI &mdash; no key, no internet.</td><td data-i18n="index.ai.table.r4.privacy">Nothing leaves your computer. Best for privacy.</td></tr>
       </tbody>
     </table>
 
-    <div class="note warn">
+    <div class="note warn" data-i18n="index.ai.privacyNote">
       <b>Privacy &amp; the Gemini free tier.</b> ScanContext strips patient
       identifiers before sending anything to a cloud provider &mdash; but on
       Google Gemini's <b>free tier, Google may still use your anonymized images
@@ -756,11 +782,11 @@
       to keep everything on your machine.
     </div>
 
-    <h3 style="margin-top:28px;color:var(--ink)">Setting up Google Gemini</h3>
+    <h3 style="margin-top:28px;color:var(--ink)" data-i18n="index.ai.setupTitle">Setting up Google Gemini</h3>
     <ol style="margin:10px 0 0 20px;color:var(--ink-dim)">
-      <li><b>Get a key</b> at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> &mdash; sign in, click <b>Create API key</b>, copy it (starts with <code>AIza&hellip;</code>). Keep it private.</li>
-      <li><b>Turn on billing</b> (paid tier) in the key's Google Cloud project &mdash; see the warning above. You can set a budget cap.</li>
-      <li><b>Add the key in ScanContext &mdash; no files to edit.</b> Open ScanContext, click <b>Settings</b> in the top bar, then set:
+      <li data-i18n="index.ai.setup.step1"><b>Get a key</b> at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> &mdash; sign in, click <b>Create API key</b>, copy it (starts with <code>AIza&hellip;</code>). Keep it private.</li>
+      <li data-i18n="index.ai.setup.step2"><b>Turn on billing</b> (paid tier) in the key's Google Cloud project &mdash; see the warning above. You can set a budget cap.</li>
+      <li data-i18n="index.ai.setup.step3"><b>Add the key in ScanContext &mdash; no files to edit.</b> Open ScanContext, click <b>Settings</b> in the top bar, then set:
         <ul style="margin:6px 0 0 18px">
           <li><b>AI provider</b>: <b>Gemini</b></li>
           <li>Paste your key into <b>Gemini API key</b> (stored locally; the page never shows it back in full &mdash; only the last 4 characters)</li>
@@ -769,39 +795,39 @@
           <li>Click <b>Save settings</b></li>
         </ul>
       </li>
-      <li>Changes apply <b>immediately &mdash; no restart needed</b>. Then open a study and use <b>Analyze study</b>; you confirm cloud use per study.</li>
-      <li><b>Your API keys are safe.</b> Settings are protected automatically &mdash; only someone with access to your installation can change them. Keys are stored locally and never leave your machine.</li>
+      <li data-i18n="index.ai.setup.step4">Changes apply <b>immediately &mdash; no restart needed</b>. Then open a study and use <b>Analyze study</b>; you confirm cloud use per study.</li>
+      <li data-i18n="index.ai.setup.step5"><b>Your API keys are safe.</b> Settings are protected automatically &mdash; only someone with access to your installation can change them. Keys are stored locally and never leave your machine.</li>
     </ol>
 
     <details style="margin-top:18px;border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:var(--bg-soft)">
-      <summary style="cursor:pointer;color:var(--ink);font-weight:600">Advanced &mdash; set the key in <code>.env</code> instead</summary>
+      <summary style="cursor:pointer;color:var(--ink);font-weight:600" data-i18n="index.ai.advanced.summary">Advanced &mdash; set the key in <code>.env</code> instead</summary>
       <div style="margin-top:10px;color:var(--ink-dim);font-size:.95rem">
-        <p>For unattended / scripted setups, the same values can be written to the <code>.env</code> file. After editing it you must <b>Stop, then Start</b> ScanContext so it reloads.</p>
+        <p data-i18n="index.ai.advanced.body">For unattended / scripted setups, the same values can be written to the <code>.env</code> file. After editing it you must <b>Stop, then Start</b> ScanContext so it reloads.</p>
         <pre><code>AI_PROVIDER=gemini
 CLOUD_AI_ENABLED=true
 GEMINI_API_KEY=AIza...your-key...
 GEMINI_MODEL=gemini-2.5-flash</code></pre>
-        <p style="font-size:.93rem">Where the <code>.env</code> file lives:</p>
+        <p style="font-size:.93rem" data-i18n="index.ai.advanced.whereTitle">Where the <code>.env</code> file lives:</p>
         <table class="tbl">
-          <thead><tr><th>How you installed</th><th><code>.env</code> location</th></tr></thead>
+          <thead><tr><th data-i18n="index.ai.advanced.thHow">How you installed</th><th data-i18n="index.ai.advanced.thLocation"><code>.env</code> location</th></tr></thead>
           <tbody>
-            <tr><td>Download bundle (.zip)</td><td>Inside the unzipped <code>ScanContext-&lt;version&gt;</code> folder</td></tr>
-            <tr><td>App &mdash; Windows</td><td><code>%APPDATA%\com.nikolareljin.scancontext\.env</code></td></tr>
-            <tr><td>App &mdash; macOS</td><td><code>~/Library/Application Support/com.nikolareljin.scancontext/.env</code></td></tr>
-            <tr><td>App &mdash; Linux</td><td><code>~/.local/share/com.nikolareljin.scancontext/.env</code></td></tr>
+            <tr><td data-i18n="index.ai.advanced.row1">Download bundle (.zip)</td><td data-i18n="index.ai.advanced.row1Loc">Inside the unzipped <code>ScanContext-&lt;version&gt;</code> folder</td></tr>
+            <tr><td data-i18n="index.ai.advanced.row2">App &mdash; Windows</td><td><code>%APPDATA%\com.nikolareljin.scancontext\.env</code></td></tr>
+            <tr><td data-i18n="index.ai.advanced.row3">App &mdash; macOS</td><td><code>~/Library/Application Support/com.nikolareljin.scancontext/.env</code></td></tr>
+            <tr><td data-i18n="index.ai.advanced.row4">App &mdash; Linux</td><td><code>~/.local/share/com.nikolareljin.scancontext/.env</code></td></tr>
           </tbody>
         </table>
-        <p style="font-size:.93rem;margin-top:8px">If both are set, the in-app <b>Settings</b> value wins.</p>
+        <p style="font-size:.93rem;margin-top:8px" data-i18n="index.ai.advanced.bothNote">If both are set, the in-app <b>Settings</b> value wins.</p>
       </div>
     </details>
 
     <div class="grid g2" style="margin-top:24px">
-      <div class="card"><h3>Which Gemini model?</h3>
-        <p><code>gemini-2.5-flash</code> &mdash; cheap, fast, good for everyday
+      <div class="card"><h3 data-i18n="index.ai.model.title">Which Gemini model?</h3>
+        <p data-i18n="index.ai.model.body"><code>gemini-2.5-flash</code> &mdash; cheap, fast, good for everyday
         use (the default).<br><code>gemini-2.5-pro</code> &mdash; the most
         thorough analysis.</p></div>
-      <div class="card"><h3>What does it cost?</h3>
-        <p>Cost per study is capped by design (about a dozen sampled images).
+      <div class="card"><h3 data-i18n="index.ai.cost.title">What does it cost?</h3>
+        <p data-i18n="index.ai.cost.body">Cost per study is capped by design (about a dozen sampled images).
         Roughly <b>2&ndash;3&cent;</b> per scan on Flash, <b>10&ndash;20&cent;</b>
         on Pro. Even 100 studies a month is about <b>$2&ndash;3</b> on Flash.
         Rates are set by Google.</p></div>
@@ -812,78 +838,78 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
 <!-- FAQ -->
 <section id="faq">
   <div class="wrap">
-    <p class="eyebrow">Help</p>
-    <h2>Troubleshooting &amp; common questions</h2>
+    <p class="eyebrow" data-i18n="index.faq.eyebrow">Help</p>
+    <h2 data-i18n="index.faq.h2">Troubleshooting &amp; common questions</h2>
 
-    <details class="faq"><summary>It says "Docker is not installed" or "not running"</summary>
-      <div class="body"><p>Install Docker Desktop, open it, and wait until it
+    <details class="faq"><summary data-i18n="index.faq.q1.summary">It says "Docker is not installed" or "not running"</summary>
+      <div class="body"><p data-i18n="index.faq.q1.body">Install Docker Desktop, open it, and wait until it
       reports <b>"running"</b>. Then start ScanContext again. On macOS, make
       sure Docker Desktop has been launched at least once.</p></div></details>
 
-    <details class="faq"><summary>Windows: Docker Desktop won't start (virtualisation not detected)</summary>
+    <details class="faq"><summary data-i18n="index.faq.q2.summary">Windows: Docker Desktop won't start (virtualisation not detected)</summary>
       <div class="body">
-      <p>If Docker Desktop reports <i>"failed to start because virtualisation
+      <p data-i18n="index.faq.q2.body1">If Docker Desktop reports <i>"failed to start because virtualisation
       support wasn't detected"</i>, it is a Windows / PC setup issue. Two
       independent fixes &mdash; most people need only one.</p>
-      <p><b>Fix A &mdash; turn on virtualization in your PC's BIOS/UEFI.</b>
+      <p data-i18n="index.faq.q2.body2"><b>Fix A &mdash; turn on virtualization in your PC's BIOS/UEFI.</b>
       Restart and press the setup key shown on the boot screen (often
       <b>Del</b>, <b>F2</b>, <b>F10</b>, or <b>Esc</b>). Find the virtualization
       setting &mdash; Intel: <i>Intel Virtualization Technology</i> / <i>VT-x</i>;
       AMD: <i>SVM Mode</i> / <i>AMD-V</i> &mdash; set it <b>Enabled</b>, save
       &amp; exit, and reopen Docker Desktop.</p>
-      <p><b>Fix B &mdash; repair the Windows features and WSL.</b> Open <b>Turn
+      <p data-i18n="index.faq.q2.body3"><b>Fix B &mdash; repair the Windows features and WSL.</b> Open <b>Turn
       Windows features on or off</b>, untick <b>Hyper-V</b> and <b>Virtual
       Machine Platform</b>, click OK and restart. Then open <b>Windows
       PowerShell</b> and run <code>wsl --update</code> (if WSL is not installed,
       run <code>wsl --install</code> as administrator) and restart. Open Docker
       Desktop and click <b>Try Again</b>.</p>
-      <p>Docker's own guide:
+      <p data-i18n="index.faq.q2.body4">Docker's own guide:
       <a href="https://docs.docker.com/desktop/troubleshoot-and-support/" target="_blank" rel="noopener">docker.com troubleshooting &#8599;</a>.</p>
       </div></details>
 
-    <details class="faq"><summary>The first start is taking a long time</summary>
-      <div class="body"><p>The very first run downloads the app images &mdash;
+    <details class="faq"><summary data-i18n="index.faq.q3.summary">The first start is taking a long time</summary>
+      <div class="body"><p data-i18n="index.faq.q3.body">The very first run downloads the app images &mdash;
       this can take a few minutes depending on your connection. Every start
       after that is fast.</p></div></details>
 
-    <details class="faq"><summary>My system warns the app is unsafe / unknown</summary>
-      <div class="body"><p>The installers aren't code-signed yet, so you may
+    <details class="faq"><summary data-i18n="index.faq.q4.summary">My system warns the app is unsafe / unknown</summary>
+      <div class="body"><p data-i18n="index.faq.q4.body">The installers aren't code-signed yet, so you may
       see a warning the first time. <b>macOS:</b> right-click the app &rarr;
       <b>Open</b> &rarr; <b>Open</b>. <b>Windows:</b> on the SmartScreen prompt,
       click <b>More info</b> &rarr; <b>Run anyway</b>. You only do this once.</p></div></details>
 
-    <details class="faq"><summary>A port is already in use</summary>
-      <div class="body"><p>ScanContext uses ports <code>5173</code> and
+    <details class="faq"><summary data-i18n="index.faq.q5.summary">A port is already in use</summary>
+      <div class="body"><p data-i18n="index.faq.q5.body">ScanContext uses ports <code>5173</code> and
       <code>8000</code>. If <code>5173</code> is taken, change
       <code>FRONTEND_PORT</code> in the <code>.env</code> file and start again.
       <code>8000</code> is built into the app and must stay free &mdash; close
       whatever is using it rather than changing <code>BACKEND_PORT</code>.</p></div></details>
 
-    <details class="faq"><summary>Is my medical data uploaded anywhere?</summary>
-      <div class="body"><p>No &mdash; not by default. Everything stays on your
+    <details class="faq"><summary data-i18n="index.faq.q6.summary">Is my medical data uploaded anywhere?</summary>
+      <div class="body"><p data-i18n="index.faq.q6.body">No &mdash; not by default. Everything stays on your
       computer. Data is only ever sent out if <b>you</b> turn on a cloud AI
       provider in Settings, and even then you confirm it per study. Use
       <b>Ollama</b> to keep AI fully local too.</p></div></details>
 
-    <details class="faq"><summary>Can ScanContext tell me what's wrong with me?</summary>
-      <div class="body"><p>No. ScanContext is <b>not a medical device</b> and
+    <details class="faq"><summary data-i18n="index.faq.q7.summary">Can ScanContext tell me what's wrong with me?</summary>
+      <div class="body"><p data-i18n="index.faq.q7.body">No. ScanContext is <b>not a medical device</b> and
       does not diagnose anything. It helps you organize and understand your
       files and prepare questions. Every result &mdash; especially anything
       AI-suggested &mdash; must be confirmed by a qualified clinician.</p></div></details>
 
-    <details class="faq"><summary>Where are my files stored?</summary>
-      <div class="body"><p>In a <code>data/</code> folder on your computer. With
+    <details class="faq"><summary data-i18n="index.faq.q8.summary">Where are my files stored?</summary>
+      <div class="body"><p data-i18n="index.faq.q8.body">In a <code>data/</code> folder on your computer. With
       the bundle it's inside the unzipped folder; with the app it's in the
       per-user app data folder. Your studies are kept between runs &mdash; keep
       that folder and any exports private.</p></div></details>
 
-    <details class="faq"><summary>How do I stop it?</summary>
-      <div class="body"><p>In the app, click <b>Stop</b> (window or tray /
+    <details class="faq"><summary data-i18n="index.faq.q9.summary">How do I stop it?</summary>
+      <div class="body"><p data-i18n="index.faq.q9.body">In the app, click <b>Stop</b> (window or tray /
       menu-bar icon). With the bundle, double-click <code>Stop ScanContext.bat</code>
       on Windows, or run <code>sh ./stop.sh</code> on macOS / Linux.</p></div></details>
 
-    <details class="faq"><summary>Still stuck?</summary>
-      <div class="body"><p>Open an issue and describe what happened:
+    <details class="faq"><summary data-i18n="index.faq.q10.summary">Still stuck?</summary>
+      <div class="body"><p data-i18n="index.faq.q10.body">Open an issue and describe what happened:
       <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener">github.com/nikolareljin/scancontext/issues</a>.</p></div></details>
   </div>
 </section>
@@ -891,16 +917,16 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
 <!-- PRIVACY -->
 <section id="privacy">
   <div class="wrap">
-    <p class="eyebrow">Privacy &amp; safety</p>
-    <h2>What you should know</h2>
+    <p class="eyebrow" data-i18n="index.privacy.eyebrow">Privacy &amp; safety</p>
+    <h2 data-i18n="index.privacy.h2">What you should know</h2>
     <div class="grid g2">
-      <div class="card"><h3>Safety</h3>
-        <p>ScanContext is not a diagnostic tool and not a substitute for
+      <div class="card"><h3 data-i18n="index.privacy.safety.title">Safety</h3>
+        <p data-i18n="index.privacy.safety.body">ScanContext is not a diagnostic tool and not a substitute for
         professional medical advice. Anything it shows &mdash; especially
         AI-suggested findings &mdash; is a prompt for a conversation with your
         doctor, never a conclusion.</p></div>
-      <div class="card"><h3>Privacy</h3>
-        <p>Medical files contain personal health information. ScanContext keeps
+      <div class="card"><h3 data-i18n="index.privacy.privacy.title">Privacy</h3>
+        <p data-i18n="index.privacy.privacy.body">Medical files contain personal health information. ScanContext keeps
         them on your machine; cloud AI is opt-in and strips identifiers first.
         That anonymization only gives real privacy on a <b>paid</b> provider
         plan &mdash; on a free tier, use Ollama for genuine medical data.</p></div>
@@ -912,13 +938,13 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
 <section id="support">
   <div class="wrap">
     <div class="support">
-      <p class="eyebrow" style="display:block">Support the project</p>
-      <h2>ScanContext is free &mdash; and built by one person</h2>
-      <p class="lead" style="margin:0 auto 22px">
+      <p class="eyebrow" style="display:block" data-i18n="index.support.eyebrow">Support the project</p>
+      <h2 data-i18n="index.support.h2">ScanContext is free &mdash; and built by one person</h2>
+      <p class="lead" style="margin:0 auto 22px" data-i18n="index.support.lead">
         If it saved you time or worry, a one-time <b>$10 donation</b> keeps it
         maintained and improving. Any amount helps.
       </p>
-      <a class="btn btn-amber" href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener">&#9749; Donate on Ko-fi</a>
+      <a class="btn btn-amber" href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener" data-i18n="index.support.donateBtn">&#9749; Donate on Ko-fi</a>
     </div>
   </div>
 </section>
@@ -927,30 +953,32 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
   <div class="wrap" style="flex-direction:column;align-items:stretch;gap:20px">
     <div class="kofi-foot">
       <span class="kofi-emoji" aria-hidden="true">&#9749;&#128155;</span>
-      <span>
+      <span data-i18n="footer.kofi">
         <b style="color:var(--ink)">Was ScanContext useful? Help keep it going.</b>
         ScanContext is completely free and built by one independent developer.
         If it saved you time or worry, please consider a one-time $10 donation
         &mdash; it directly funds maintenance, bug fixes, and new features. Any
         amount helps.
       </span>
-      <a class="btn btn-amber btn-sm" href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener" style="flex:none">&#9749; Donate $10 on Ko-fi</a>
+      <a class="btn btn-amber btn-sm" href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener" style="flex:none" data-i18n="footer.donateBtn">&#9749; Donate $10 on Ko-fi</a>
     </div>
     <div class="foot-row">
-      <div>Built and maintained by <b style="color:var(--ink-dim)">Nik Reljin</b>. Not a medical device &mdash; not a diagnosis.</div>
+      <div data-i18n="footer.builtBy">Built and maintained by <b style="color:var(--ink-dim)">Nik Reljin</b>. Not a medical device &mdash; not a diagnosis.</div>
       <div>
-        <a href="https://github.com/nikolareljin/scancontext/releases/latest" target="_blank" rel="noopener">Releases</a> &nbsp;&middot;&nbsp;
-        <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener">Report a problem</a> &nbsp;&middot;&nbsp;
-        <a href="./privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
-        <a href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener">Donate</a> &nbsp;&middot;&nbsp;
-        <a href="https://www.linkedin.com/in/nikolareljin" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/nikolareljin/scancontext/releases/latest" target="_blank" rel="noopener" data-i18n="footer.links.releases">Releases</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/nikolareljin/scancontext/issues" target="_blank" rel="noopener" data-i18n="footer.links.report">Report a problem</a> &nbsp;&middot;&nbsp;
+        <a href="./privacy.html" data-i18n="footer.links.privacy">Privacy Policy</a> &nbsp;&middot;&nbsp;
+        <a href="https://ko-fi.com/nikolareljin" target="_blank" rel="noopener" data-i18n="footer.links.donate">Donate</a> &nbsp;&middot;&nbsp;
+        <a href="https://www.linkedin.com/in/nikolareljin" target="_blank" rel="noopener" data-i18n="footer.links.linkedin">LinkedIn</a>
       </div>
     </div>
   </div>
 </footer>
 
-<button id="toTop" aria-label="Back to top">&#8593;</button>
+<button id="toTop" data-i18n="nav.backToTop" data-i18n-attr="aria-label" aria-label="Back to top">&#8593;</button>
 
+<script src="js/flags.js"></script>
+<script src="js/i18n.js"></script>
 <script>
 (function(){
   "use strict";
@@ -968,12 +996,20 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
   var labels={windows:"Windows",mac:"macOS",linux:"Linux"};
   var os=detectOS();
 
-  var osDetect=document.getElementById("osDetect");
-  if(os){
-    osDetect.innerHTML="We detected <b>"+labels[os]+"</b> — the install steps below are ready for it.";
-  }else{
-    osDetect.textContent="Install steps for Windows, macOS, and Linux are below.";
+  function renderOsDetect(){
+    var osDetect=document.getElementById("osDetect");
+    if(!osDetect)return;
+    var t=window.SC_T||function(k){return k;};
+    var th=window.SC_T_HTML||t;
+    if(os){
+      // innerHTML sink -> use the sanitized variant so a tampered translation
+      // of index.os.detected cannot inject unsafe markup.
+      osDetect.innerHTML=th("index.os.detected",{os:labels[os]});
+    }else{
+      osDetect.textContent=t("index.os.generic");
+    }
   }
+  if(window.SC_onLocale){window.SC_onLocale(renderOsDetect);}else{renderOsDetect();}
 
   // ---- OS tabs ----
   var tabs=Array.prototype.slice.call(document.querySelectorAll(".os-tab"));
@@ -1029,12 +1065,19 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
     // asset can't be picked instead of the app bundle.
     "bundle-zip":/^scancontext\b.*\.zip$/i
   };
+  var lastRelease=null;
+  function renderVerBadge(){
+    if(!lastRelease||!lastRelease.tag_name)return;
+    var badge=document.getElementById("verBadge");
+    if(!badge)return;
+    var t=window.SC_T||function(k){return k;};
+    badge.textContent=t("index.ver.badge",{ver:String(lastRelease.tag_name).replace(/^v/,"")});
+  }
+  if(window.SC_onLocale){window.SC_onLocale(renderVerBadge);}
   function applyRelease(rel){
     if(!rel||!rel.assets||!rel.assets.length)return;
-    var badge=document.getElementById("verBadge");
-    if(badge&&rel.tag_name){
-      badge.textContent="latest: v"+String(rel.tag_name).replace(/^v/,"");
-    }
+    lastRelease=rel;
+    renderVerBadge();
     Object.keys(ASSET_RULES).forEach(function(key){
       var rx=ASSET_RULES[key],hit=null,i;
       for(i=0;i<rel.assets.length;i++){
