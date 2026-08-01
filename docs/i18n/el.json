@@ -306,5 +306,8 @@
   "privacy.thirdParty.item1": "<b>GitHub Container Registry (ghcr.io) &mdash; GitHub, Inc.:</b> Χρησιμοποιείται για τη διανομή εικόνων Docker. Επικοινωνία από το Docker στην πρώτη εκτέλεση και για ενημερώσεις. <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener\">GitHub Privacy Statement</a>",
   "privacy.thirdParty.item2": "<b>Ko-fi:</b> Ο σύνδεσμος δωρεάς στον ιστότοπο του ScanContext οδηγεί σε μια σελίδα Ko-fi. Αν επιλέξετε να κάνετε δωρεά, το Ko-fi επεξεργάζεται αυτήν τη συναλλαγή. <a href=\"https://more.ko-fi.com/privacy\" target=\"_blank\" rel=\"noopener\">Ko-fi Privacy Policy</a>",
   "privacy.thirdParty.item3": "<b>GitHub Issues:</b> Το κύριο κανάλι υποστήριξης για το ScanContext είναι το GitHub Issues στο <a href=\"https://github.com/nikolareljin/scancontext/issues\" target=\"_blank\" rel=\"noopener\">github.com/nikolareljin/scancontext/issues</a>. Η χρήση του GitHub υπόκειται στην πολιτική απορρήτου του GitHub.",
-  "a11y.language": "Γλώσσα"
+  "a11y.language": "Γλώσσα",
+  "common.copy": "&#128203; Αντιγραφή",
+  "common.copied": "&#10003; Αντιγράφηκε",
+  "common.copyAria": "Αντιγραφή της εντολής στο πρόχειρο"
 }

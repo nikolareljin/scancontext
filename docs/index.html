@@ -207,6 +207,28 @@
   .opt li{color:var(--ink-dim);margin:5px 0;font-size:.95rem}
   .opt li b{color:var(--ink)}
 
+  /* ---- copyable command block ---- */
+  .copy-block{position:relative;margin:12px 0}
+  .copy-block pre{margin:0;padding-right:116px;color:var(--teal);font-size:.9rem;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .copy-btn{
+    position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:6px;
+    background:var(--panel-2);border:1px solid var(--line);color:var(--ink-dim);
+    border-radius:8px;padding:5px 11px;font-family:var(--font);font-size:.78rem;
+    font-weight:700;line-height:1.4;cursor:pointer;
+    transition:color .15s ease,border-color .15s ease,background .15s ease;
+  }
+  .copy-btn:hover{color:var(--ink);border-color:var(--teal)}
+  .copy-btn:active{transform:translateY(1px)}
+  .copy-btn.copied{background:var(--teal);border-color:var(--teal);color:#04201c}
+  .copy-btn .copy-done{display:none}
+  .copy-btn.copied .copy-idle{display:none}
+  .copy-btn.copied .copy-done{display:inline}
+  @media(max-width:560px){
+    .copy-block pre{padding-right:18px;padding-bottom:46px}
+    .copy-btn{top:auto;bottom:10px;right:10px}
+  }
+
   /* ---- table ---- */
   .tbl{width:100%;border-collapse:collapse;margin-top:16px;font-size:.93rem}
   .tbl th,.tbl td{
@@ -613,7 +635,15 @@
           <span class="tag" data-i18n="index.install.win.optB.tag">Option B &mdash; winget</span>
           <h4 data-i18n="index.install.win.optB.title">Install via winget</h4>
           <p data-i18n="index.install.win.optB.body">For developers and power users who prefer the command line. No SmartScreen warning &mdash; installs through Microsoft&rsquo;s trusted channel.</p>
-          <pre style="background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:.75rem 1rem;font-size:.85rem;overflow-x:auto;margin:.5rem 0">winget install NikolaReljin.ScanContext</pre>
+          <div class="copy-block">
+            <pre id="wingetCmd">winget install NikolaReljin.ScanContext</pre>
+            <button type="button" class="copy-btn" data-copy-from="wingetCmd"
+                    data-i18n="common.copyAria" data-i18n-attr="aria-label"
+                    aria-label="Copy the command to the clipboard">
+              <span class="copy-idle" data-i18n="common.copy">&#128203; Copy</span>
+              <span class="copy-done" data-i18n="common.copied">&#10003; Copied</span>
+            </button>
+          </div>
           <ol>
             <li data-i18n="index.install.win.optB.step1">Open <b>PowerShell</b> or <b>Windows Terminal</b> and run the command above.</li>
             <li data-i18n="index.install.win.optB.step2">Open <b>ScanContext</b> from the Start menu when the install finishes.</li>
@@ -1022,6 +1052,55 @@ GEMINI_MODEL=gemini-2.5-flash</code></pre>
     t.addEventListener("click",function(){selectOS(t.dataset.os);});
   });
   selectOS(os||"windows");
+
+  // ---- copy-to-clipboard for command blocks ----
+  // navigator.clipboard exists only in secure contexts, and this page also ships
+  // inside the offline bundle where it is opened over file:// — so keep the
+  // execCommand path as a fallback, and just select the text if both fail so the
+  // reader can still press Ctrl/Cmd+C.
+  function legacyCopy(text){
+    var ta=document.createElement("textarea");
+    ta.value=text;
+    ta.setAttribute("readonly","");
+    ta.style.cssText="position:fixed;top:0;left:-9999px;opacity:0";
+    document.body.appendChild(ta);
+    ta.select();
+    var ok=false;
+    try{ok=document.execCommand("copy");}catch(e){ok=false;}
+    document.body.removeChild(ta);
+    return ok;
+  }
+  function selectNode(node){
+    try{
+      var r=document.createRange();
+      r.selectNodeContents(node);
+      var s=window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    }catch(e){}
+  }
+  function flashCopied(btn){
+    btn.classList.add("copied");
+    if(btn._copyTimer)clearTimeout(btn._copyTimer);
+    btn._copyTimer=setTimeout(function(){btn.classList.remove("copied");},1800);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy-from]"),function(btn){
+    var src=document.getElementById(btn.getAttribute("data-copy-from"));
+    if(!src){btn.hidden=true;return;}
+    btn.addEventListener("click",function(){
+      var text=(src.textContent||"").trim();
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(
+          function(){flashCopied(btn);},
+          function(){if(legacyCopy(text))flashCopied(btn);else selectNode(src);}
+        );
+      }else if(legacyCopy(text)){
+        flashCopied(btn);
+      }else{
+        selectNode(src);
+      }
+    });
+  });
 
   // ---- mobile nav ----
   var toggle=document.querySelector(".nav-toggle");

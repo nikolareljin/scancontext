@@ -306,5 +306,8 @@
   "privacy.thirdParty.item1": "<b>GitHub Container Registry (ghcr.io) &mdash; GitHub, Inc.:</b> Folosit pentru distribuirea imaginilor Docker. Contactat de Docker la prima rulare și pentru actualizări. <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener\">GitHub Privacy Statement</a>",
   "privacy.thirdParty.item2": "<b>Ko-fi:</b> Linkul de donație de pe site-ul ScanContext duce către o pagină Ko-fi. Dacă alegi să donezi, Ko-fi procesează acea tranzacție. <a href=\"https://more.ko-fi.com/privacy\" target=\"_blank\" rel=\"noopener\">Ko-fi Privacy Policy</a>",
   "privacy.thirdParty.item3": "<b>GitHub Issues:</b> Canalul principal de suport pentru ScanContext este GitHub Issues, la <a href=\"https://github.com/nikolareljin/scancontext/issues\" target=\"_blank\" rel=\"noopener\">github.com/nikolareljin/scancontext/issues</a>. Utilizarea GitHub este supusă politicii de confidențialitate a GitHub.",
-  "a11y.language": "Limbă"
+  "a11y.language": "Limbă",
+  "common.copy": "&#128203; Copiază",
+  "common.copied": "&#10003; Copiat",
+  "common.copyAria": "Copiază comanda în clipboard"
 }

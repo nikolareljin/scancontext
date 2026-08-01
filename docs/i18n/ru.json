@@ -306,5 +306,8 @@
   "privacy.thirdParty.item1": "<b>GitHub Container Registry (ghcr.io) &mdash; GitHub, Inc.:</b> Используется для распространения образов Docker. К нему обращается Docker при первом запуске и при обновлениях. <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener\">Заявление о конфиденциальности GitHub</a>",
   "privacy.thirdParty.item2": "<b>Ko-fi:</b> Ссылка для пожертвований на сайте ScanContext ведёт на страницу Ko-fi. Если вы решите сделать пожертвование, эту транзакцию обрабатывает Ko-fi. <a href=\"https://more.ko-fi.com/privacy\" target=\"_blank\" rel=\"noopener\">Политика конфиденциальности Ko-fi</a>",
   "privacy.thirdParty.item3": "<b>GitHub Issues:</b> Основной канал поддержки ScanContext &mdash; это GitHub Issues по адресу <a href=\"https://github.com/nikolareljin/scancontext/issues\" target=\"_blank\" rel=\"noopener\">github.com/nikolareljin/scancontext/issues</a>. Использование GitHub регулируется политикой конфиденциальности GitHub.",
-  "a11y.language": "Язык"
+  "a11y.language": "Язык",
+  "common.copy": "&#128203; Копировать",
+  "common.copied": "&#10003; Скопировано",
+  "common.copyAria": "Скопировать команду в буфер обмена"
 }

@@ -306,5 +306,8 @@
   "privacy.thirdParty.item1": "<b>GitHub Container Registry (ghcr.io) &mdash; GitHub, Inc.:</b> Se usa para distribuir imágenes de Docker. Docker lo contacta en la primera ejecución y para actualizaciones. <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener\">Declaración de privacidad de GitHub</a>",
   "privacy.thirdParty.item2": "<b>Ko-fi:</b> El enlace de donación en el sitio web de ScanContext dirige a una página de Ko-fi. Si eliges donar, Ko-fi procesa esa transacción. <a href=\"https://more.ko-fi.com/privacy\" target=\"_blank\" rel=\"noopener\">Política de privacidad de Ko-fi</a>",
   "privacy.thirdParty.item3": "<b>GitHub Issues:</b> El canal principal de soporte de ScanContext es GitHub Issues en <a href=\"https://github.com/nikolareljin/scancontext/issues\" target=\"_blank\" rel=\"noopener\">github.com/nikolareljin/scancontext/issues</a>. El uso de GitHub está sujeto a la política de privacidad de GitHub.",
-  "a11y.language": "Idioma"
+  "a11y.language": "Idioma",
+  "common.copy": "&#128203; Copiar",
+  "common.copied": "&#10003; Copiado",
+  "common.copyAria": "Copiar el comando al portapapeles"
 }

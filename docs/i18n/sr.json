@@ -306,5 +306,8 @@
   "privacy.thirdParty.item1": "<b>GitHub Container Registry (ghcr.io) &mdash; GitHub, Inc.:</b> Користи се за дистрибуцију Docker слика. Docker га контактира при првом покретању и за ажурирања. <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\" target=\"_blank\" rel=\"noopener\">GitHub Privacy Statement</a>",
   "privacy.thirdParty.item2": "<b>Ko-fi:</b> Линк за донације на ScanContext сајту води на Ko-fi страницу. Ако одлучите да донирате, Ko-fi обрађује ту трансакцију. <a href=\"https://more.ko-fi.com/privacy\" target=\"_blank\" rel=\"noopener\">Ko-fi Privacy Policy</a>",
   "privacy.thirdParty.item3": "<b>GitHub Issues:</b> Основни канал подршке за ScanContext је GitHub Issues на <a href=\"https://github.com/nikolareljin/scancontext/issues\" target=\"_blank\" rel=\"noopener\">github.com/nikolareljin/scancontext/issues</a>. Коришћење GitHub-а подлеже GitHub-овој политици приватности.",
-  "a11y.language": "Језик"
+  "a11y.language": "Језик",
+  "common.copy": "&#128203; Копирај",
+  "common.copied": "&#10003; Копирано",
+  "common.copyAria": "Копирај команду у клипборд"
 }

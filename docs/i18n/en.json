@@ -1,6 +1,9 @@
 {
   "_dir": "ltr",
   "a11y.language": "Language",
+  "common.copied": "&#10003; Copied",
+  "common.copy": "&#128203; Copy",
+  "common.copyAria": "Copy the command to the clipboard",
   "footer.builtBy": "Built and maintained by <b style=\"color:var(--ink-dim)\">Nik Reljin</b>. Not a medical device &mdash; not a diagnosis.",
   "footer.donateBtn": "&#9749; Donate $10 on Ko-fi",
   "footer.kofi": "<b style=\"color:var(--ink)\">Was ScanContext useful? Help keep it going.</b> ScanContext is completely free and built by one independent developer. If it saved you time or worry, please consider a one-time $10 donation &mdash; it directly funds maintenance, bug fixes, and new features. Any amount helps.",
